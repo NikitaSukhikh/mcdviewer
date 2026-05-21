@@ -29,12 +29,14 @@ const EDITOR_VIRTUAL_TABLE_ROW_HEIGHT = 35;
 const EDITOR_VIRTUAL_TABLE_OVERSCAN_ROWS = 8;
 const MARKETING_LINKS = [
   {
-    label: "The Lord of the Rings (Wikipedia page)",
-    href: "/marketing/the-lord-of-the-rings-wikipedia-page.pdf",
+    label: "The Lord of the Rings",
+    href: "/showcases/lord-of-the-rings.mcd",
+    fileName: "lord-of-the-rings.mcd",
   },
   {
     label: "Specification for automobile manufacturer",
-    href: "/marketing/specification-for-automobile-manufacturer.pdf",
+    href: "/showcases/auto-manufacturer-tech-spec.mcd",
+    fileName: "auto-manufacturer-tech-spec.mcd",
   },
 ] as const;
 const textDecoder = new TextDecoder();
@@ -5428,14 +5430,17 @@ function showImagePopup(insertLine: number, target: InsertLineTarget): void {
 function showMarketingPopup(): void {
   showModal(`
     <div class="mcd-popup mcd-marketing-popup" role="dialog" aria-modal="true" aria-labelledby="marketingPopupTitle">
-      <div class="mcd-popup-header">
-        <div class="mcd-popup-title" id="marketingPopupTitle">Take a look at these files</div>
+      <div class="mcd-popup-header mcd-marketing-header">
+        <div>
+          <div class="mcd-marketing-kicker">MCD showcase</div>
+          <div class="mcd-popup-title" id="marketingPopupTitle">Take a look at these files</div>
+        </div>
         <button class="mcd-popup-close" type="button" data-action="close" aria-label="Close">&times;</button>
       </div>
       <div class="mcd-marketing-links">
         ${MARKETING_LINKS.map(
           (link) => `
-            <a class="mcd-marketing-link" href="${escapeAttr(link.href)}" target="_blank" rel="noopener noreferrer">
+            <a class="mcd-marketing-link" href="${escapeAttr(link.href)}" data-showcase-file="${escapeAttr(link.fileName)}">
               ${escapeHtml(link.label)}
             </a>
           `,
@@ -5443,7 +5448,31 @@ function showMarketingPopup(): void {
       </div>
     </div>
   `);
+  activeModal?.classList.add("mcd-marketing-backdrop");
+  for (const link of Array.from(activeModal?.querySelectorAll<HTMLAnchorElement>(".mcd-marketing-link") ?? [])) {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      void openShowcase(link.href, link.dataset.showcaseFile ?? "showcase.mcd");
+    });
+  }
   activeModal?.querySelector<HTMLButtonElement>('[data-action="close"]')?.focus();
+}
+
+async function openShowcase(url: string, fileName: string): Promise<void> {
+  closeActiveModal();
+  setStatus(`Opening ${fileName}...`);
+  clearDiagnostics();
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Could not load showcase '${fileName}' (${response.status}).`);
+    }
+    const blob = await response.blob();
+    await loadFile(new File([blob], fileName, { type: MCD_MIMETYPE }));
+  } catch (error) {
+    showError(error);
+  }
 }
 
 function showModal(html: string): void {

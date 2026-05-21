@@ -1260,6 +1260,143 @@ textarea {
   justify-content: flex-end;
 }
 
+.mcd-marketing-backdrop {
+  background:
+    linear-gradient(rgb(4 10 13 / 78%), rgb(4 10 13 / 78%)),
+    repeating-linear-gradient(
+      90deg,
+      rgb(103 232 249 / 10%) 0,
+      rgb(103 232 249 / 10%) 1px,
+      transparent 1px,
+      transparent 42px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgb(163 230 53 / 8%) 0,
+      rgb(163 230 53 / 8%) 1px,
+      transparent 1px,
+      transparent 42px
+    );
+}
+
+.mcd-marketing-popup {
+  background:
+    linear-gradient(135deg, rgb(103 232 249 / 16%), transparent 34%),
+    linear-gradient(315deg, rgb(244 114 182 / 12%), transparent 38%),
+    #0b1114;
+  border: 1px solid rgb(103 232 249 / 58%);
+  box-shadow:
+    0 24px 80px rgb(0 0 0 / 46%),
+    0 0 0 1px rgb(163 230 53 / 20%) inset,
+    0 0 38px rgb(103 232 249 / 22%);
+  color: #ecfeff;
+  max-width: min(100%, 460px);
+  overflow: hidden;
+  position: relative;
+  width: 460px;
+}
+
+.mcd-marketing-popup::before {
+  background: linear-gradient(90deg, transparent, #67e8f9, #a3e635, transparent);
+  content: "";
+  height: 2px;
+  left: 0;
+  opacity: 0.9;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.mcd-marketing-popup::after {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 7px,
+    rgb(236 254 255 / 4%) 7px,
+    rgb(236 254 255 / 4%) 8px
+  );
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.mcd-marketing-header {
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+.mcd-marketing-popup .mcd-popup-title {
+  color: #f8fafc;
+  font-size: 18px;
+}
+
+.mcd-marketing-kicker {
+  color: #a3e635;
+  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+}
+
+.mcd-marketing-popup .mcd-popup-close {
+  background: rgb(236 254 255 / 8%);
+  border-color: rgb(103 232 249 / 44%);
+  color: #ecfeff;
+  position: relative;
+  z-index: 1;
+}
+
+.mcd-marketing-popup .mcd-popup-close:hover,
+.mcd-marketing-popup .mcd-popup-close:focus-visible {
+  background: rgb(103 232 249 / 18%);
+  border-color: #67e8f9;
+  outline: none;
+}
+
+.mcd-marketing-links {
+  display: grid;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.mcd-marketing-link {
+  background:
+    linear-gradient(90deg, rgb(103 232 249 / 18%), transparent 62%),
+    rgb(236 254 255 / 6%);
+  border: 1px solid rgb(148 163 184 / 36%);
+  border-radius: 8px;
+  color: #ecfeff;
+  display: grid;
+  font-weight: 700;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 13px 14px;
+  text-decoration: none;
+}
+
+.mcd-marketing-link::after {
+  color: #67e8f9;
+  content: "LOAD";
+  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  margin-left: 14px;
+}
+
+.mcd-marketing-link:hover,
+.mcd-marketing-link:focus-visible {
+  background:
+    linear-gradient(90deg, rgb(163 230 53 / 24%), transparent 66%),
+    rgb(103 232 249 / 12%);
+  border-color: #a3e635;
+  box-shadow: 0 0 22px rgb(163 230 53 / 14%);
+  outline: none;
+  transform: translateY(-1px);
+}
+
 .inline-editable {
   cursor: text;
   white-space: pre-wrap;
