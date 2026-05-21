@@ -236,6 +236,13 @@ interface TablePlacement {
   source?: SourceSpan;
 }
 
+interface ImagePlacement {
+  image: string;
+  caption?: string;
+  alt?: string;
+  source?: SourceSpan;
+}
+
 interface PreviewLazyTable {
   placement: TablePlacement;
 }
@@ -3251,6 +3258,32 @@ function lazyPreviewTableMarkdown(markdown: string, blocks: DocumentBlock[]): st
   });
 }
 
+function imagePreviewMarkdown(markdown: string, blocks: DocumentBlock[]): string {
+  const blockPlacements = imagePlacementsFromBlocks(blocks);
+  let blockCursor = 0;
+  const directivePattern = /(^|\n):::\s*image[^\n]*\n([\s\S]*?)\n:::/g;
+  return markdown.replace(directivePattern, (raw, leading: string, body: string) => {
+    const fields = directiveFields(body ?? "");
+    const image = fields.get("image");
+    if (!image) {
+      return raw;
+    }
+    const placement: ImagePlacement = {
+      image,
+      caption: fields.get("caption"),
+      alt: fields.get("alt"),
+    };
+    const blockMatch = nextMatchingImagePlacement(blockPlacements, blockCursor, placement);
+    if (blockMatch) {
+      blockCursor = blockMatch.index + 1;
+      placement.source = blockMatch.placement.source;
+      placement.caption ??= blockMatch.placement.caption;
+      placement.alt ??= blockMatch.placement.alt;
+    }
+    return `${leading}${imagePreviewHtml(placement)}`;
+  });
+}
+
 function nextMatchingTablePlacement(
   placements: TablePlacement[],
   startIndex: number,
@@ -3263,6 +3296,20 @@ function nextMatchingTablePlacement(
       placement.display === target.display &&
       (placement.view ?? "") === (target.view ?? "")
     ) {
+      return { index, placement };
+    }
+  }
+  return undefined;
+}
+
+function nextMatchingImagePlacement(
+  placements: ImagePlacement[],
+  startIndex: number,
+  target: ImagePlacement,
+): { index: number; placement: ImagePlacement } | undefined {
+  for (let index = startIndex; index < placements.length; index += 1) {
+    const placement = placements[index];
+    if (placement.image === target.image) {
       return { index, placement };
     }
   }
@@ -3282,14 +3329,42 @@ ${caption}
 </figure>`;
 }
 
+function imagePreviewHtml(placement: ImagePlacement): string {
+  const assetPath = assetPathForImageId(placement.image);
+  if (!assetPath) {
+    return `<div class="diagnostic">Missing image asset '${escapeHtml(placement.image)}'.</div>`;
+  }
+  const caption = placement.caption
+    ? `<figcaption>${marked.parseInline(placement.caption, { async: false }) as string}</figcaption>`
+    : "";
+  const altSource = placement.alt ?? placement.caption;
+  const alt = altSource ? plainTextFromMarkdown(altSource) : "";
+  return `<figure class="mcd-image-figure" data-mcd-image-id="${escapeAttr(placement.image)}">
+<img src="${escapeAttr(assetPath)}" alt="${escapeAttr(alt)}" />
+${caption}
+</figure>`;
+}
+
+function assetPathForImageId(imageId: string): string | undefined {
+  return state?.manifest.assets?.find((asset) => asset.id === imageId)?.path;
+}
+
+function plainTextFromMarkdown(markdown: string): string {
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = DOMPurify.sanitize(marked.parseInline(markdown, { async: false }) as string, {
+    USE_PROFILES: { html: true },
+  });
+  return wrapper.textContent?.replace(/\s+/g, " ").trim() ?? markdown;
+}
+
 async function renderMarkdownPreview(markdown: string, blocks: DocumentBlock[] = []): Promise<void> {
   resetLazyPreviewTables();
   const annotationItems = annotationPreviewItems(markdown);
-  const lazyMarkdown = lazyPreviewTableMarkdown(
-    annotatedPreviewMarkdown(markdown, annotationItems),
+  const previewMarkdown = imagePreviewMarkdown(
+    lazyPreviewTableMarkdown(annotatedPreviewMarkdown(markdown, annotationItems), blocks),
     blocks,
   );
-  const rendered = marked.parse(lazyMarkdown, {
+  const rendered = marked.parse(previewMarkdown, {
     async: false,
   }) as string;
   const sanitized = DOMPurify.sanitize(rendered, {
@@ -3297,6 +3372,7 @@ async function renderMarkdownPreview(markdown: string, blocks: DocumentBlock[] =
     ADD_ATTR: [
       "aria-label",
       "data-mcd-display",
+      "data-mcd-image-id",
       "data-mcd-lazy-table-index",
       "data-mcd-table-id",
       "data-mcd-view-id",
@@ -4393,6 +4469,30 @@ function tablePlacementsFromBlocks(blocks: DocumentBlock[]): TablePlacement[] {
         view: typeof placement.view === "string" ? placement.view : undefined,
         display: placement.display === "chart" ? "chart" : "table",
         caption: typeof placement.caption === "string" ? placement.caption : undefined,
+        source: block.source,
+      },
+    ];
+  });
+}
+
+function imagePlacementsFromBlocks(blocks: DocumentBlock[]): ImagePlacement[] {
+  return blocks.flatMap((block) => {
+    if (block.type !== "image_ref") {
+      return [];
+    }
+    const placement = block.placement as {
+      image?: unknown;
+      caption?: unknown;
+      alt?: unknown;
+    };
+    if (typeof placement.image !== "string") {
+      return [];
+    }
+    return [
+      {
+        image: placement.image,
+        caption: typeof placement.caption === "string" ? placement.caption : undefined,
+        alt: typeof placement.alt === "string" ? placement.alt : undefined,
         source: block.source,
       },
     ];
