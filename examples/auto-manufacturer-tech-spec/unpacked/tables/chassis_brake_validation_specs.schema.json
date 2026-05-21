@@ -1,0 +1,89 @@
+{
+  "id": "chassis_brake_validation_specs",
+  "columns": [
+    {
+      "name": "test_id",
+      "type": "string",
+      "label": "Test ID",
+      "nullable": false
+    },
+    {
+      "name": "vehicle_variant",
+      "type": "string",
+      "label": "Vehicle Variant",
+      "nullable": false
+    },
+    {
+      "name": "axle_config",
+      "type": "string",
+      "label": "Axle Config",
+      "nullable": false
+    },
+    {
+      "name": "front_spring_rate_n_mm",
+      "type": "decimal",
+      "label": "Front Spring Rate",
+      "nullable": false
+    },
+    {
+      "name": "rear_spring_rate_n_mm",
+      "type": "decimal",
+      "label": "Rear Spring Rate",
+      "nullable": false
+    },
+    {
+      "name": "damping_front_ns_m",
+      "type": "integer",
+      "label": "Front Damping",
+      "nullable": false
+    },
+    {
+      "name": "damping_rear_ns_m",
+      "type": "integer",
+      "label": "Rear Damping",
+      "nullable": false
+    },
+    {
+      "name": "tire_size",
+      "type": "string",
+      "label": "Tire Size",
+      "nullable": false
+    },
+    {
+      "name": "rotor_front_mm",
+      "type": "integer",
+      "label": "Front Rotor",
+      "nullable": false
+    },
+    {
+      "name": "rotor_rear_mm",
+      "type": "integer",
+      "label": "Rear Rotor",
+      "nullable": false
+    },
+    {
+      "name": "stop_distance_100_0_m",
+      "type": "decimal",
+      "label": "Stop Distance 100-0",
+      "nullable": false
+    },
+    {
+      "name": "lateral_grip_g",
+      "type": "decimal",
+      "label": "Lateral Grip",
+      "nullable": false
+    },
+    {
+      "name": "stability_margin_pct",
+      "type": "decimal",
+      "label": "Stability Margin",
+      "nullable": false
+    },
+    {
+      "name": "validation_date",
+      "type": "date",
+      "label": "Validation Date",
+      "nullable": false
+    }
+  ]
+}

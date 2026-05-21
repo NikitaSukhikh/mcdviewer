@@ -1,0 +1,12 @@
+{
+  "id": "default",
+  "table": "page_metrics",
+  "display": "table",
+  "columns": [
+    { "name": "page", "label": "Page" },
+    { "name": "theme", "label": "Theme" },
+    { "name": "word_count", "label": "Word Count", "format": "integer" },
+    { "name": "signal_score", "label": "Signal Score", "format": "decimal" },
+    { "name": "target_score", "label": "Target Score", "format": "decimal" }
+  ]
+}

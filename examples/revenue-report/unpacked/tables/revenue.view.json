@@ -1,0 +1,17 @@
+{
+  "id": "default",
+  "table": "revenue",
+  "display": "table",
+  "columns": [
+    {
+      "name": "quarter",
+      "label": "Quarter"
+    },
+    {
+      "name": "revenue_gbp",
+      "label": "Revenue",
+      "format": "currency",
+      "currency": "GBP"
+    }
+  ]
+}

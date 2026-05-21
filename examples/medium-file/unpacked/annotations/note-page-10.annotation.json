@@ -1,0 +1,10 @@
+{
+  "id": "note-page-10",
+  "target": { "type": "path", "path": "content/main.md" },
+  "kind": "comment",
+  "status": "open",
+  "body": "Page 10 annotation: final review should confirm all feature types are present.",
+  "author": "codex",
+  "created": "2026-05-19T00:00:00Z",
+  "labels": ["page-10", "review"]
+}

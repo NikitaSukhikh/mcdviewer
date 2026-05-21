@@ -1,0 +1,14 @@
+{
+  "id": "image-001-250px-First_Single_Volume_Edition_of_The_Lord_of_the_R",
+  "asset": "assets/image-001-250px-First_Single_Volume_Edition_of_The_Lord_of_the_R.gif",
+  "mediaType": "image/gif",
+  "role": "photo",
+  "caption": "The Lord of the Rings",
+  "alt": "The Lord of the Rings",
+  "intrinsicSize": {
+    "width": 250,
+    "height": 383,
+    "unit": "px"
+  },
+  "hash": "sha256:c6f741cb6c7157b8e6ba7222d7965a921bcb7a154b3d3207409c77c24e7c2d2d"
+}

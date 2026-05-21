@@ -1,0 +1,9 @@
+{
+  "id": "page-02-diagram",
+  "asset": "assets/page-02-diagram.svg",
+  "mediaType": "image/svg+xml",
+  "role": "diagram",
+  "caption": "Abstract queue review diagram.",
+  "alt": "Abstract diagram for page 2 queue review.",
+  "intrinsicSize": { "width": 640, "height": 220, "unit": "px" }
+}

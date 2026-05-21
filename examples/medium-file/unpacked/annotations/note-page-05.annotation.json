@@ -1,0 +1,10 @@
+{
+  "id": "note-page-05",
+  "target": { "type": "path", "path": "content/main.md" },
+  "kind": "comment",
+  "status": "open",
+  "body": "Page 5 annotation: review the quality window description for target-band accuracy.",
+  "author": "codex",
+  "created": "2026-05-19T00:00:00Z",
+  "labels": ["page-05", "review"]
+}

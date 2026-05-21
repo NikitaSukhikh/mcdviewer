@@ -1,0 +1,10 @@
+{
+  "id": "page_metrics",
+  "columns": [
+    { "name": "page", "type": "integer", "label": "Page", "nullable": false },
+    { "name": "theme", "type": "string", "label": "Theme", "nullable": false },
+    { "name": "word_count", "type": "integer", "label": "Word Count", "nullable": false },
+    { "name": "signal_score", "type": "decimal", "label": "Signal Score", "nullable": false },
+    { "name": "target_score", "type": "decimal", "label": "Target Score", "nullable": false }
+  ]
+}

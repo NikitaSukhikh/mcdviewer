@@ -1,0 +1,78 @@
+{
+  "id": "default",
+  "table": "powertrain_calibration_specs",
+  "display": "table",
+  "columns": [
+    {
+      "name": "calibration_id",
+      "label": "Calibration ID"
+    },
+    {
+      "name": "platform_code",
+      "label": "Platform Code"
+    },
+    {
+      "name": "engine_family",
+      "label": "Engine Family"
+    },
+    {
+      "name": "displacement_l",
+      "label": "Displacement",
+      "format": "number",
+      "unit": "L"
+    },
+    {
+      "name": "cylinders",
+      "label": "Cylinders",
+      "format": "number"
+    },
+    {
+      "name": "boost_pressure_kpa",
+      "label": "Boost Pressure",
+      "format": "number",
+      "unit": "kPa"
+    },
+    {
+      "name": "peak_power_kw",
+      "label": "Peak Power",
+      "format": "number",
+      "unit": "kW"
+    },
+    {
+      "name": "peak_torque_nm",
+      "label": "Peak Torque",
+      "format": "number",
+      "unit": "Nm"
+    },
+    {
+      "name": "final_drive_ratio",
+      "label": "Final Drive Ratio",
+      "format": "number"
+    },
+    {
+      "name": "fuel_map_revision",
+      "label": "Fuel Map Revision"
+    },
+    {
+      "name": "wltp_co2_g_per_km",
+      "label": "WLTP CO2",
+      "format": "number",
+      "unit": "g/km"
+    },
+    {
+      "name": "thermal_limit_deg_c",
+      "label": "Thermal Limit",
+      "format": "number",
+      "unit": "deg C"
+    },
+    {
+      "name": "ecu_checksum",
+      "label": "ECU Checksum"
+    },
+    {
+      "name": "production_release_date",
+      "label": "Production Release Date",
+      "format": "date"
+    }
+  ]
+}

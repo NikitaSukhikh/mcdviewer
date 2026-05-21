@@ -1,0 +1,6 @@
+{
+  "format": "MCD",
+  "version": "0.1",
+  "profile": "MCD-Core",
+  "entrypoint": "content/main.md"
+}

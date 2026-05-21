@@ -1,0 +1,75 @@
+{
+  "format": "MCD",
+  "version": "0.1",
+  "profile": "MCD-Core",
+  "conformance": [
+    "MCD-Core",
+    "MCD-Images"
+  ],
+  "entrypoint": "content/main.md",
+  "title": "The Lord of the Rings",
+  "images": [
+    {
+      "id": "image-001-250px-First_Single_Volume_Edition_of_The_Lord_of_the_R",
+      "metadata": "images/image-001-250px-First_Single_Volume_Edition_of_The_Lord_of_the_R.image.json"
+    },
+    {
+      "id": "image-002-250px-One_Ring_Blender_Render",
+      "metadata": "images/image-002-250px-One_Ring_Blender_Render.image.json"
+    },
+    {
+      "id": "image-003-500px-Tolkien-s_Legendarium",
+      "metadata": "images/image-003-500px-Tolkien-s_Legendarium.image.json"
+    },
+    {
+      "id": "image-004-500px-One_Ring_inscription",
+      "metadata": "images/image-004-500px-One_Ring_inscription.image.json"
+    },
+    {
+      "id": "image-005-500px-Beowulf_eotenas_ylfe_orcneas",
+      "metadata": "images/image-005-500px-Beowulf_eotenas_ylfe_orcneas.image.json"
+    },
+    {
+      "id": "image-006-330px-Remington_Covers_for_Ballantine_Lord_of_the_Rings_1960s",
+      "metadata": "images/image-006-330px-Remington_Covers_for_Ballantine_Lord_of_the_Rings_1960s.image.json"
+    },
+    {
+      "id": "image-007-250px-Matamata_sign",
+      "metadata": "images/image-007-250px-Matamata_sign.image.json"
+    }
+  ],
+  "assets": [
+    {
+      "id": "image-001-250px-First_Single_Volume_Edition_of_The_Lord_of_the_R",
+      "path": "assets/image-001-250px-First_Single_Volume_Edition_of_The_Lord_of_the_R.gif"
+    },
+    {
+      "id": "image-002-250px-One_Ring_Blender_Render",
+      "path": "assets/image-002-250px-One_Ring_Blender_Render.png"
+    },
+    {
+      "id": "image-003-500px-Tolkien-s_Legendarium",
+      "path": "assets/image-003-500px-Tolkien-s_Legendarium.png"
+    },
+    {
+      "id": "image-004-500px-One_Ring_inscription",
+      "path": "assets/image-004-500px-One_Ring_inscription.png"
+    },
+    {
+      "id": "image-005-500px-Beowulf_eotenas_ylfe_orcneas",
+      "path": "assets/image-005-500px-Beowulf_eotenas_ylfe_orcneas.jpg"
+    },
+    {
+      "id": "image-006-330px-Remington_Covers_for_Ballantine_Lord_of_the_Rings_1960s",
+      "path": "assets/image-006-330px-Remington_Covers_for_Ballantine_Lord_of_the_Rings_1960s.jpg"
+    },
+    {
+      "id": "image-007-250px-Matamata_sign",
+      "path": "assets/image-007-250px-Matamata_sign.jpg"
+    }
+  ],
+  "layout": {
+    "styles": "layout/styles.json",
+    "pageMap": "layout/page-map.json"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "process-diagram",
+  "asset": "assets/process-diagram.svg",
+  "mediaType": "image/svg+xml",
+  "role": "diagram",
+  "caption": "Facility workflow showing intake, processing, quality control, and dispatch.",
+  "alt": "Diagram of the facility workflow from intake to dispatch.",
+  "intrinsicSize": {
+    "width": 640,
+    "height": 180,
+    "unit": "px"
+  },
+  "hash": "sha256:6bc9a277f9763c5fc39df54dfd412762ae268980212afbf24d9321a6c6047a02"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "note-page-02",
+  "target": { "type": "path", "path": "content/main.md" },
+  "kind": "comment",
+  "status": "open",
+  "body": "Page 2 annotation: verify that queue review language matches the latest operating notes.",
+  "author": "codex",
+  "created": "2026-05-19T00:00:00Z",
+  "labels": ["page-02", "review"]
+}

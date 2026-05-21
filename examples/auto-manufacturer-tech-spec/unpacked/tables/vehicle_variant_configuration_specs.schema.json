@@ -1,0 +1,89 @@
+{
+  "id": "vehicle_variant_configuration_specs",
+  "columns": [
+    {
+      "name": "variant_id",
+      "type": "string",
+      "label": "Variant ID",
+      "nullable": false
+    },
+    {
+      "name": "model_year",
+      "type": "integer",
+      "label": "Model Year",
+      "nullable": false
+    },
+    {
+      "name": "region",
+      "type": "string",
+      "label": "Region",
+      "nullable": false
+    },
+    {
+      "name": "body_style",
+      "type": "string",
+      "label": "Body Style",
+      "nullable": false
+    },
+    {
+      "name": "trim_level",
+      "type": "string",
+      "label": "Trim Level",
+      "nullable": false
+    },
+    {
+      "name": "drivetrain",
+      "type": "string",
+      "label": "Drivetrain",
+      "nullable": false
+    },
+    {
+      "name": "wheelbase_mm",
+      "type": "integer",
+      "label": "Wheelbase",
+      "nullable": false
+    },
+    {
+      "name": "curb_mass_kg",
+      "type": "integer",
+      "label": "Curb Mass",
+      "nullable": false
+    },
+    {
+      "name": "drag_coefficient",
+      "type": "decimal",
+      "label": "Drag Coefficient",
+      "nullable": false
+    },
+    {
+      "name": "frontal_area_m2",
+      "type": "decimal",
+      "label": "Frontal Area",
+      "nullable": false
+    },
+    {
+      "name": "max_payload_kg",
+      "type": "integer",
+      "label": "Max Payload",
+      "nullable": false
+    },
+    {
+      "name": "tow_rating_kg",
+      "type": "integer",
+      "label": "Tow Rating",
+      "nullable": false
+    },
+    {
+      "name": "homologation_code",
+      "type": "string",
+      "label": "Homologation Code",
+      "nullable": false
+    },
+    {
+      "name": "active_aero",
+      "type": "boolean",
+      "label": "Active Aero",
+      "nullable": false
+    }
+  ]
+}

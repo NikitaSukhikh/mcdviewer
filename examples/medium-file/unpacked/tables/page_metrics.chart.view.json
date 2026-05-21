@@ -1,0 +1,10 @@
+{
+  "id": "signal-line",
+  "table": "page_metrics",
+  "display": "chart",
+  "chart": {
+    "type": "line",
+    "x": { "column": "page", "label": "Page" },
+    "y": { "column": "signal_score", "label": "Signal Score", "format": "decimal" }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "format": "MCD",
+  "version": "0.1",
+  "profile": "MCD-Core",
+  "conformance": [
+    "MCD-Core"
+  ],
+  "entrypoint": "content/main.md",
+  "title": "Orion Apex Motors Technical Specification Dossier",
+  "tables": [
+    {
+      "id": "vehicle_variant_configuration_specs",
+      "data": "tables/vehicle_variant_configuration_specs.csv",
+      "schema": "tables/vehicle_variant_configuration_specs.schema.json",
+      "views": {
+        "default": "tables/vehicle_variant_configuration_specs.view.json"
+      }
+    },
+    {
+      "id": "powertrain_calibration_specs",
+      "data": "tables/powertrain_calibration_specs.csv",
+      "schema": "tables/powertrain_calibration_specs.schema.json",
+      "views": {
+        "default": "tables/powertrain_calibration_specs.view.json"
+      }
+    },
+    {
+      "id": "battery_pack_module_specs",
+      "data": "tables/battery_pack_module_specs.csv",
+      "schema": "tables/battery_pack_module_specs.schema.json",
+      "views": {
+        "default": "tables/battery_pack_module_specs.view.json"
+      }
+    },
+    {
+      "id": "chassis_brake_validation_specs",
+      "data": "tables/chassis_brake_validation_specs.csv",
+      "schema": "tables/chassis_brake_validation_specs.schema.json",
+      "views": {
+        "default": "tables/chassis_brake_validation_specs.view.json"
+      }
+    },
+    {
+      "id": "production_quality_measurements",
+      "data": "tables/production_quality_measurements.csv",
+      "schema": "tables/production_quality_measurements.schema.json",
+      "views": {
+        "default": "tables/production_quality_measurements.view.json"
+      }
+    }
+  ]
+}

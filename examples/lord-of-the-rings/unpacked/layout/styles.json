@@ -1,0 +1,30 @@
+{
+  "id": "wikipedia-article-style",
+  "fonts": {
+    "body": "Linux Libertine, Georgia, Times New Roman, serif",
+    "sans": "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+  },
+  "colors": {
+    "text": "#202122",
+    "background": "#ffffff",
+    "border": "#a2a9b1",
+    "muted": "#54595d",
+    "accent": "#36c"
+  },
+  "page": {
+    "maxWidth": "980px",
+    "padding": "28px 32px",
+    "backgroundColor": "#ffffff"
+  },
+  "body": {
+    "fontFamily": "Linux Libertine, Georgia, Times New Roman, serif",
+    "fontSize": "16px",
+    "color": "#202122",
+    "backgroundColor": "#ffffff"
+  },
+  "images": {
+    "borderColor": "#c8ccd1",
+    "backgroundColor": "#f8f9fa",
+    "padding": "8px"
+  }
+}

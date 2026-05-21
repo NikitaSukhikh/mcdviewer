@@ -1,0 +1,17 @@
+{
+  "id": "revenue",
+  "columns": [
+    {
+      "name": "quarter",
+      "type": "string",
+      "label": "Quarter",
+      "nullable": false
+    },
+    {
+      "name": "revenue_gbp",
+      "type": "decimal",
+      "label": "Revenue",
+      "nullable": false
+    }
+  ]
+}

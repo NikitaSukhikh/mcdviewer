@@ -1,0 +1,14 @@
+{
+  "id": "image-004-500px-One_Ring_inscription",
+  "asset": "assets/image-004-500px-One_Ring_inscription.png",
+  "mediaType": "image/png",
+  "role": "photo",
+  "caption": "Tolkien's [calligraphy](https://en.wikipedia.org/wiki/Calligraphy) of the [Ring Verse](https://en.wikipedia.org/wiki/Ring_Verse) was one of the few illustrations in the first edition. It is written in the [Black Speech](https://en.wikipedia.org/wiki/Black_Speech) of [Mordor](https://en.wikipedia.org/wiki/Mordor) using the [Tengwar](https://en.wikipedia.org/wiki/Tengwar) script.",
+  "alt": "Tolkien's [calligraphy](https://en.wikipedia.org/wiki/Calligraphy) of the [Ring Verse](https://en.wikipedia.org/wiki/Ring_Verse) was one of the few illustrations in the first edition. It is written in the [Black Speech](https://en.wikipedia.org/wiki/Black_Speech) of [Mordor](https://en.wikipedia.org/wiki/Mordor) using the [Tengwar](https://en.wikipedia.org/wiki/Tengwar) script.",
+  "intrinsicSize": {
+    "width": 500,
+    "height": 141,
+    "unit": "px"
+  },
+  "hash": "sha256:9907c7da85a1a9b15788a39d4ad41a31160efb2339732c5ead82a2c81d850e33"
+}

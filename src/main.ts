@@ -27,6 +27,16 @@ const VIRTUAL_TABLE_ROW_HEIGHT = 38;
 const VIRTUAL_TABLE_OVERSCAN_ROWS = 8;
 const EDITOR_VIRTUAL_TABLE_ROW_HEIGHT = 35;
 const EDITOR_VIRTUAL_TABLE_OVERSCAN_ROWS = 8;
+const MARKETING_LINKS = [
+  {
+    label: "The Lord of the Rings (Wikipedia page)",
+    href: "/marketing/the-lord-of-the-rings-wikipedia-page.pdf",
+  },
+  {
+    label: "Specification for automobile manufacturer",
+    href: "/marketing/specification-for-automobile-manufacturer.pdf",
+  },
+] as const;
 const textDecoder = new TextDecoder();
 type ActiveTab = "text" | "tables" | "annotations";
 
@@ -690,6 +700,8 @@ for (const tab of ["Text", "Tables", "Annotations"] as const) {
 addAnnotationButton.addEventListener("click", () => {
   armWordAnnotationPick();
 });
+
+window.setTimeout(showMarketingPopup, 0);
 
 function byId<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id);
@@ -5411,6 +5423,27 @@ function showImagePopup(insertLine: number, target: InsertLineTarget): void {
     void createImageAtLine(insertLine, file, alt, target).then(() => closeActiveModal());
   });
   fileInput?.focus();
+}
+
+function showMarketingPopup(): void {
+  showModal(`
+    <div class="mcd-popup mcd-marketing-popup" role="dialog" aria-modal="true" aria-labelledby="marketingPopupTitle">
+      <div class="mcd-popup-header">
+        <div class="mcd-popup-title" id="marketingPopupTitle">Take a look at these files</div>
+        <button class="mcd-popup-close" type="button" data-action="close" aria-label="Close">&times;</button>
+      </div>
+      <div class="mcd-marketing-links">
+        ${MARKETING_LINKS.map(
+          (link) => `
+            <a class="mcd-marketing-link" href="${escapeAttr(link.href)}" target="_blank" rel="noopener noreferrer">
+              ${escapeHtml(link.label)}
+            </a>
+          `,
+        ).join("")}
+      </div>
+    </div>
+  `);
+  activeModal?.querySelector<HTMLButtonElement>('[data-action="close"]')?.focus();
 }
 
 function showModal(html: string): void {

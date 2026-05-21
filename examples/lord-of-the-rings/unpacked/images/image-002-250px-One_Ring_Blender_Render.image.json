@@ -1,0 +1,14 @@
+{
+  "id": "image-002-250px-One_Ring_Blender_Render",
+  "asset": "assets/image-002-250px-One_Ring_Blender_Render.png",
+  "mediaType": "image/png",
+  "role": "photo",
+  "caption": "[Gandalf](https://en.wikipedia.org/wiki/Gandalf) proves that [Frodo](https://en.wikipedia.org/wiki/Frodo_Baggins)'s Ring is the [One Ring](https://en.wikipedia.org/wiki/One_Ring) by throwing it into Frodo's fireplace, revealing the hidden text of the [Rhyme of the Rings](https://en.wikipedia.org/wiki/Rhyme_of_the_Rings).",
+  "alt": "[Gandalf](https://en.wikipedia.org/wiki/Gandalf) proves that [Frodo](https://en.wikipedia.org/wiki/Frodo_Baggins)'s Ring is the [One Ring](https://en.wikipedia.org/wiki/One_Ring) by throwing it into Frodo's fireplace, revealing the hidden text of the [Rhyme of the Rings](https://en.wikipedia.org/wiki/Rhyme_of_the_Rings).",
+  "intrinsicSize": {
+    "width": 250,
+    "height": 234,
+    "unit": "px"
+  },
+  "hash": "sha256:a85678fd36cff6e8b2e8b32775c98960eddb77728a153d5f12eca3384dc840fe"
+}

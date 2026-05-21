@@ -1,0 +1,9 @@
+{
+  "id": "page-04-diagram",
+  "asset": "assets/page-04-diagram.svg",
+  "mediaType": "image/svg+xml",
+  "role": "diagram",
+  "caption": "Abstract exception routing diagram.",
+  "alt": "Abstract diagram for page 4 exception routing.",
+  "intrinsicSize": { "width": 640, "height": 220, "unit": "px" }
+}

@@ -1,0 +1,18 @@
+{
+  "format": "MCD",
+  "version": "0.1",
+  "profile": "MCD-Core",
+  "entrypoint": "content/main.md",
+  "title": "Revenue Report",
+  "tables": [
+    {
+      "id": "revenue",
+      "data": "tables/revenue.csv",
+      "schema": "tables/revenue.schema.json",
+      "views": {
+        "default": "tables/revenue.view.json",
+        "quarterly-bar-chart": "tables/revenue.chart.view.json"
+      }
+    }
+  ]
+}

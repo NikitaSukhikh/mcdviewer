@@ -1,0 +1,10 @@
+{
+  "id": "note-page-04",
+  "target": { "type": "path", "path": "content/main.md" },
+  "kind": "comment",
+  "status": "open",
+  "body": "Page 4 annotation: exception routing should remain aligned with the documented control flow.",
+  "author": "codex",
+  "created": "2026-05-19T00:00:00Z",
+  "labels": ["page-04", "review"]
+}

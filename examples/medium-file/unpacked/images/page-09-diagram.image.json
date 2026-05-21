@@ -1,0 +1,9 @@
+{
+  "id": "page-09-diagram",
+  "asset": "assets/page-09-diagram.svg",
+  "mediaType": "image/svg+xml",
+  "role": "diagram",
+  "caption": "Abstract delivery summary diagram.",
+  "alt": "Abstract diagram for page 9 delivery summary.",
+  "intrinsicSize": { "width": 640, "height": 220, "unit": "px" }
+}

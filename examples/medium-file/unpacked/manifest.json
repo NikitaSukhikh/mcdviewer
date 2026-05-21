@@ -1,0 +1,51 @@
+{
+  "format": "MCD",
+  "version": "0.1",
+  "profile": "MCD-Core",
+  "conformance": [
+    "MCD-Core",
+    "MCD-Images",
+    "MCD-Charts",
+    "MCD-Strict"
+  ],
+  "entrypoint": "content/main.md",
+  "title": "Medium Ten Page MCD Sample",
+  "tables": [
+    {
+      "id": "page_metrics",
+      "data": "tables/page_metrics.csv",
+      "schema": "tables/page_metrics.schema.json",
+      "views": {
+        "default": "tables/page_metrics.view.json",
+        "signal-line": "tables/page_metrics.chart.view.json"
+      }
+    }
+  ],
+  "images": [
+    { "id": "page-01-diagram", "metadata": "images/page-01-diagram.image.json" },
+    { "id": "page-02-diagram", "metadata": "images/page-02-diagram.image.json" },
+    { "id": "page-03-diagram", "metadata": "images/page-03-diagram.image.json" },
+    { "id": "page-04-diagram", "metadata": "images/page-04-diagram.image.json" },
+    { "id": "page-05-diagram", "metadata": "images/page-05-diagram.image.json" },
+    { "id": "page-06-diagram", "metadata": "images/page-06-diagram.image.json" },
+    { "id": "page-07-diagram", "metadata": "images/page-07-diagram.image.json" },
+    { "id": "page-08-diagram", "metadata": "images/page-08-diagram.image.json" },
+    { "id": "page-09-diagram", "metadata": "images/page-09-diagram.image.json" },
+    { "id": "page-10-diagram", "metadata": "images/page-10-diagram.image.json" }
+  ],
+  "annotations": [
+    { "id": "note-page-01", "metadata": "annotations/note-page-01.annotation.json" },
+    { "id": "note-page-02", "metadata": "annotations/note-page-02.annotation.json" },
+    { "id": "note-page-03", "metadata": "annotations/note-page-03.annotation.json" },
+    { "id": "note-page-04", "metadata": "annotations/note-page-04.annotation.json" },
+    { "id": "note-page-05", "metadata": "annotations/note-page-05.annotation.json" },
+    { "id": "note-page-06", "metadata": "annotations/note-page-06.annotation.json" },
+    { "id": "note-page-07", "metadata": "annotations/note-page-07.annotation.json" },
+    { "id": "note-page-08", "metadata": "annotations/note-page-08.annotation.json" },
+    { "id": "note-page-09", "metadata": "annotations/note-page-09.annotation.json" },
+    { "id": "note-page-10", "metadata": "annotations/note-page-10.annotation.json" }
+  ],
+  "layout": {
+    "pageMap": "layout/page-map.json"
+  }
+}

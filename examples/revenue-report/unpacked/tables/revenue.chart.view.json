@@ -1,0 +1,18 @@
+{
+  "id": "quarterly-bar-chart",
+  "table": "revenue",
+  "display": "chart",
+  "chart": {
+    "type": "bar",
+    "x": {
+      "column": "quarter",
+      "label": "Quarter"
+    },
+    "y": {
+      "column": "revenue_gbp",
+      "label": "Revenue",
+      "format": "currency",
+      "currency": "GBP"
+    }
+  }
+}

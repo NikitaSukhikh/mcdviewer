@@ -1,0 +1,14 @@
+{
+  "pages": [
+    { "number": 1, "label": "Page 1", "sourceRefs": ["page-01-table", "page-01-chart", "page-01-image"] },
+    { "number": 2, "label": "Page 2", "sourceRefs": ["page-02-table", "page-02-chart", "page-02-image"] },
+    { "number": 3, "label": "Page 3", "sourceRefs": ["page-03-table", "page-03-chart", "page-03-image"] },
+    { "number": 4, "label": "Page 4", "sourceRefs": ["page-04-table", "page-04-chart", "page-04-image"] },
+    { "number": 5, "label": "Page 5", "sourceRefs": ["page-05-table", "page-05-chart", "page-05-image"] },
+    { "number": 6, "label": "Page 6", "sourceRefs": ["page-06-table", "page-06-chart", "page-06-image"] },
+    { "number": 7, "label": "Page 7", "sourceRefs": ["page-07-table", "page-07-chart", "page-07-image"] },
+    { "number": 8, "label": "Page 8", "sourceRefs": ["page-08-table", "page-08-chart", "page-08-image"] },
+    { "number": 9, "label": "Page 9", "sourceRefs": ["page-09-table", "page-09-chart", "page-09-image"] },
+    { "number": 10, "label": "Page 10", "sourceRefs": ["page-10-table", "page-10-chart", "page-10-image"] }
+  ]
+}

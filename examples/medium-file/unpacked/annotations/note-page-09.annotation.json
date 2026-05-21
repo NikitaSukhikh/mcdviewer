@@ -1,0 +1,10 @@
+{
+  "id": "note-page-09",
+  "target": { "type": "path", "path": "content/main.md" },
+  "kind": "comment",
+  "status": "open",
+  "body": "Page 9 annotation: delivery summary language should reflect the canonical source rows.",
+  "author": "codex",
+  "created": "2026-05-19T00:00:00Z",
+  "labels": ["page-09", "review"]
+}

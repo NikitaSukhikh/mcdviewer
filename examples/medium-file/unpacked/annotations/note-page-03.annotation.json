@@ -1,0 +1,10 @@
+{
+  "id": "note-page-03",
+  "target": { "type": "path", "path": "content/main.md" },
+  "kind": "comment",
+  "status": "open",
+  "body": "Page 3 annotation: check the throughput wording against the metric table.",
+  "author": "codex",
+  "created": "2026-05-19T00:00:00Z",
+  "labels": ["page-03", "review"]
+}

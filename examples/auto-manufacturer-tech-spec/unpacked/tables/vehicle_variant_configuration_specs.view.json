@@ -1,0 +1,75 @@
+{
+  "id": "default",
+  "table": "vehicle_variant_configuration_specs",
+  "display": "table",
+  "columns": [
+    {
+      "name": "variant_id",
+      "label": "Variant ID"
+    },
+    {
+      "name": "model_year",
+      "label": "Model Year",
+      "format": "number"
+    },
+    {
+      "name": "region",
+      "label": "Region"
+    },
+    {
+      "name": "body_style",
+      "label": "Body Style"
+    },
+    {
+      "name": "trim_level",
+      "label": "Trim Level"
+    },
+    {
+      "name": "drivetrain",
+      "label": "Drivetrain"
+    },
+    {
+      "name": "wheelbase_mm",
+      "label": "Wheelbase",
+      "format": "number",
+      "unit": "mm"
+    },
+    {
+      "name": "curb_mass_kg",
+      "label": "Curb Mass",
+      "format": "number",
+      "unit": "kg"
+    },
+    {
+      "name": "drag_coefficient",
+      "label": "Drag Coefficient",
+      "format": "number"
+    },
+    {
+      "name": "frontal_area_m2",
+      "label": "Frontal Area",
+      "format": "number",
+      "unit": "m2"
+    },
+    {
+      "name": "max_payload_kg",
+      "label": "Max Payload",
+      "format": "number",
+      "unit": "kg"
+    },
+    {
+      "name": "tow_rating_kg",
+      "label": "Tow Rating",
+      "format": "number",
+      "unit": "kg"
+    },
+    {
+      "name": "homologation_code",
+      "label": "Homologation Code"
+    },
+    {
+      "name": "active_aero",
+      "label": "Active Aero"
+    }
+  ]
+}

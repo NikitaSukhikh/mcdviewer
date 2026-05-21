@@ -1,0 +1,14 @@
+{
+  "id": "image-003-500px-Tolkien-s_Legendarium",
+  "asset": "assets/image-003-500px-Tolkien-s_Legendarium.png",
+  "mediaType": "image/png",
+  "role": "diagram",
+  "caption": "Navigable diagram of [Tolkien's legendarium](https://en.wikipedia.org/wiki/Tolkien%27s_legendarium). The Lord of the Rings began as a sequel to The Hobbit but gradually took in elements of the legendarium, the mythology summarized in [The Silmarillion](https://en.wikipedia.org/wiki/The_Silmarillion).",
+  "alt": "Diagram of the documents comprising Tolkien's Legendarium, as interpreted very strictly, strictly, or more broadly",
+  "intrinsicSize": {
+    "width": 500,
+    "height": 547,
+    "unit": "px"
+  },
+  "hash": "sha256:4785e509e1eb0725c9e89d02da71a5356e063d67c635fd8d083fac0a3f3f6add"
+}

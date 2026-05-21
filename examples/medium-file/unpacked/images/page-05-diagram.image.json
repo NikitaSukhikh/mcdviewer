@@ -1,0 +1,9 @@
+{
+  "id": "page-05-diagram",
+  "asset": "assets/page-05-diagram.svg",
+  "mediaType": "image/svg+xml",
+  "role": "diagram",
+  "caption": "Abstract quality window diagram.",
+  "alt": "Abstract diagram for page 5 quality window.",
+  "intrinsicSize": { "width": 640, "height": 220, "unit": "px" }
+}

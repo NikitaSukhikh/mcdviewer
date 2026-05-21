@@ -1,0 +1,82 @@
+{
+  "id": "default",
+  "table": "battery_pack_module_specs",
+  "display": "table",
+  "columns": [
+    {
+      "name": "pack_id",
+      "label": "Pack ID"
+    },
+    {
+      "name": "chemistry",
+      "label": "Chemistry"
+    },
+    {
+      "name": "series_cells",
+      "label": "Series Cells",
+      "format": "number"
+    },
+    {
+      "name": "parallel_cells",
+      "label": "Parallel Cells",
+      "format": "number"
+    },
+    {
+      "name": "nominal_voltage_v",
+      "label": "Nominal Voltage",
+      "format": "number",
+      "unit": "V"
+    },
+    {
+      "name": "capacity_kwh",
+      "label": "Capacity",
+      "format": "number",
+      "unit": "kWh"
+    },
+    {
+      "name": "module_count",
+      "label": "Module Count",
+      "format": "number"
+    },
+    {
+      "name": "cell_capacity_ah",
+      "label": "Cell Capacity",
+      "format": "number",
+      "unit": "Ah"
+    },
+    {
+      "name": "peak_discharge_kw",
+      "label": "Peak Discharge",
+      "format": "number",
+      "unit": "kW"
+    },
+    {
+      "name": "continuous_charge_kw",
+      "label": "Continuous Charge",
+      "format": "number",
+      "unit": "kW"
+    },
+    {
+      "name": "coolant_flow_l_min",
+      "label": "Coolant Flow",
+      "format": "number",
+      "unit": "L/min"
+    },
+    {
+      "name": "mass_kg",
+      "label": "Mass",
+      "format": "number",
+      "unit": "kg"
+    },
+    {
+      "name": "estimated_range_km",
+      "label": "Estimated Range",
+      "format": "number",
+      "unit": "km"
+    },
+    {
+      "name": "bms_firmware_version",
+      "label": "BMS Firmware Version"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "note-page-06",
+  "target": { "type": "path", "path": "content/main.md" },
+  "kind": "comment",
+  "status": "open",
+  "body": "Page 6 annotation: confirm the capacity model assumptions before using this page in examples.",
+  "author": "codex",
+  "created": "2026-05-19T00:00:00Z",
+  "labels": ["page-06", "review"]
+}

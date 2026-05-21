@@ -1,0 +1,14 @@
+{
+  "id": "image-007-250px-Matamata_sign",
+  "asset": "assets/image-007-250px-Matamata_sign.jpg",
+  "mediaType": "image/jpeg",
+  "role": "photo",
+  "caption": "\"Welcome to Hobbiton\" sign in Matamata, New Zealand, where Peter Jackson's film version was shot.",
+  "alt": "\"Welcome to Hobbiton\" sign in Matamata, New Zealand, where Peter Jackson's film version was shot.",
+  "intrinsicSize": {
+    "width": 250,
+    "height": 188,
+    "unit": "px"
+  },
+  "hash": "sha256:ec96569acd2f8cbf11b9b8655564d6f50951e9414f1eab5575b75a4a055027a8"
+}

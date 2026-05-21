@@ -1,0 +1,77 @@
+{
+  "id": "default",
+  "table": "production_quality_measurements",
+  "display": "table",
+  "columns": [
+    {
+      "name": "lot_id",
+      "label": "Lot ID"
+    },
+    {
+      "name": "plant_code",
+      "label": "Plant Code"
+    },
+    {
+      "name": "line_id",
+      "label": "Line ID"
+    },
+    {
+      "name": "shift",
+      "label": "Shift"
+    },
+    {
+      "name": "build_date",
+      "label": "Build Date",
+      "format": "date"
+    },
+    {
+      "name": "units_inspected",
+      "label": "Units Inspected",
+      "format": "number"
+    },
+    {
+      "name": "torque_rework_ppm",
+      "label": "Torque Rework",
+      "format": "number",
+      "unit": "ppm"
+    },
+    {
+      "name": "paint_defect_ppm",
+      "label": "Paint Defects",
+      "format": "number",
+      "unit": "ppm"
+    },
+    {
+      "name": "gap_flush_mean_mm",
+      "label": "Gap Flush Mean",
+      "format": "number",
+      "unit": "mm"
+    },
+    {
+      "name": "end_of_line_pass_rate_pct",
+      "label": "End of Line Pass Rate",
+      "format": "number",
+      "unit": "%"
+    },
+    {
+      "name": "water_leak_failures",
+      "label": "Water Leak Failures",
+      "format": "number"
+    },
+    {
+      "name": "battery_health_score_pct",
+      "label": "Battery Health Score",
+      "format": "number",
+      "unit": "%"
+    },
+    {
+      "name": "warranty_risk_index",
+      "label": "Warranty Risk Index",
+      "format": "number"
+    },
+    {
+      "name": "release_status",
+      "label": "Release Status"
+    }
+  ]
+}

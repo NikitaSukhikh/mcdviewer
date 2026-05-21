@@ -1,0 +1,10 @@
+{
+  "id": "note-page-08",
+  "target": { "type": "path", "path": "content/main.md" },
+  "kind": "comment",
+  "status": "open",
+  "body": "Page 8 annotation: check forecast wording against the line chart trend.",
+  "author": "codex",
+  "created": "2026-05-19T00:00:00Z",
+  "labels": ["page-08", "review"]
+}

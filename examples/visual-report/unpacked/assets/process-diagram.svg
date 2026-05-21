@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 180" role="img" aria-label="Facility workflow">
+  <rect width="640" height="180" fill="#f7f8fa"/>
+  <g fill="#ffffff" stroke="#2f5f98" stroke-width="3">
+    <rect x="28" y="55" width="120" height="70" rx="6"/>
+    <rect x="188" y="55" width="120" height="70" rx="6"/>
+    <rect x="348" y="55" width="120" height="70" rx="6"/>
+    <rect x="508" y="55" width="104" height="70" rx="6"/>
+  </g>
+  <g fill="#263238" font-family="Arial, sans-serif" font-size="18" text-anchor="middle">
+    <text x="88" y="96">Intake</text>
+    <text x="248" y="96">Processing</text>
+    <text x="408" y="86">Quality</text>
+    <text x="408" y="108">Control</text>
+    <text x="560" y="96">Dispatch</text>
+  </g>
+  <g stroke="#455a64" stroke-width="3" fill="none">
+    <path d="M150 90h34"/>
+    <path d="M310 90h34"/>
+    <path d="M470 90h34"/>
+  </g>
+  <g fill="#455a64">
+    <path d="M184 90l-10-6v12z"/>
+    <path d="M344 90l-10-6v12z"/>
+    <path d="M504 90l-10-6v12z"/>
+  </g>
+</svg>

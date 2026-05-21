@@ -1,0 +1,82 @@
+{
+  "id": "default",
+  "table": "chassis_brake_validation_specs",
+  "display": "table",
+  "columns": [
+    {
+      "name": "test_id",
+      "label": "Test ID"
+    },
+    {
+      "name": "vehicle_variant",
+      "label": "Vehicle Variant"
+    },
+    {
+      "name": "axle_config",
+      "label": "Axle Config"
+    },
+    {
+      "name": "front_spring_rate_n_mm",
+      "label": "Front Spring Rate",
+      "format": "number",
+      "unit": "N/mm"
+    },
+    {
+      "name": "rear_spring_rate_n_mm",
+      "label": "Rear Spring Rate",
+      "format": "number",
+      "unit": "N/mm"
+    },
+    {
+      "name": "damping_front_ns_m",
+      "label": "Front Damping",
+      "format": "number",
+      "unit": "Ns/m"
+    },
+    {
+      "name": "damping_rear_ns_m",
+      "label": "Rear Damping",
+      "format": "number",
+      "unit": "Ns/m"
+    },
+    {
+      "name": "tire_size",
+      "label": "Tire Size"
+    },
+    {
+      "name": "rotor_front_mm",
+      "label": "Front Rotor",
+      "format": "number",
+      "unit": "mm"
+    },
+    {
+      "name": "rotor_rear_mm",
+      "label": "Rear Rotor",
+      "format": "number",
+      "unit": "mm"
+    },
+    {
+      "name": "stop_distance_100_0_m",
+      "label": "Stop Distance 100-0",
+      "format": "number",
+      "unit": "m"
+    },
+    {
+      "name": "lateral_grip_g",
+      "label": "Lateral Grip",
+      "format": "number",
+      "unit": "g"
+    },
+    {
+      "name": "stability_margin_pct",
+      "label": "Stability Margin",
+      "format": "number",
+      "unit": "%"
+    },
+    {
+      "name": "validation_date",
+      "label": "Validation Date",
+      "format": "date"
+    }
+  ]
+}

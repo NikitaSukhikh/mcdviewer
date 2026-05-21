@@ -1,0 +1,18 @@
+{
+  "format": "MCD",
+  "version": "0.1",
+  "profile": "MCD-Core",
+  "conformance": [
+    "MCD-Core",
+    "MCD-Images",
+    "MCD-Strict"
+  ],
+  "entrypoint": "content/main.md",
+  "title": "Visual Report",
+  "images": [
+    {
+      "id": "process-diagram",
+      "metadata": "images/process-diagram.image.json"
+    }
+  ]
+}

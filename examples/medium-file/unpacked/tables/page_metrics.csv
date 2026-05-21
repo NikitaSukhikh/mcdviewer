@@ -1,0 +1,11 @@
+page,theme,word_count,signal_score,target_score
+1,Intake Baseline,420,48.5,50.0
+2,Queue Review,455,52.0,53.0
+3,Throughput Check,470,55.5,56.0
+4,Exception Routing,498,58.0,59.0
+5,Quality Window,520,63.0,63.0
+6,Capacity Model,545,67.5,68.0
+7,Risk Review,560,70.0,71.0
+8,Forecast Update,585,74.0,75.0
+9,Delivery Summary,610,79.5,80.0
+10,Closing Review,640,86.0,86.0
