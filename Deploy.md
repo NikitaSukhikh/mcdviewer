@@ -1,1 +1,1 @@
-vercel --prod n--yes
+vercel --prod --yes

@@ -1647,6 +1647,10 @@ textarea {
   .mcd-insert-lines {
     max-width: 100%;
   }
+
+  .preview-table-wrap {
+    max-height: 62dvh;
+  }
 }
 
 @page {

@@ -22,6 +22,7 @@ const HISTORY_GROUP_IDLE_MS = 1200;
 const EMPTY_FIRST_HEADING_ID = "mcd-empty-first-heading";
 const RESERVED_ROW_HEADER_COLUMN = "row_header";
 const MIN_PREVIEW_TABLE_SCROLL_HEIGHT = 180;
+const MOBILE_PREVIEW_TABLE_MAX_HEIGHT_RATIO = 0.62;
 const LAZY_PREVIEW_TABLE_ROOT_MARGIN = 900;
 const VIRTUAL_TABLE_ROW_HEIGHT = 38;
 const VIRTUAL_TABLE_OVERSCAN_ROWS = 8;
@@ -6556,7 +6557,20 @@ function syncPreviewTableMaxHeight(wrapper: HTMLDivElement): void {
     return;
   }
 
-  wrapper.style.maxHeight = `${availableHeight}px`;
+  const mobileMaxHeight = mobilePreviewTableMaxHeight();
+  const maxHeight = mobileMaxHeight === undefined ? availableHeight : Math.min(availableHeight, mobileMaxHeight);
+  wrapper.style.maxHeight = `${maxHeight}px`;
+}
+
+function mobilePreviewTableMaxHeight(): number | undefined {
+  if (!window.matchMedia("(max-width: 860px)").matches) {
+    return undefined;
+  }
+  const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+  return Math.max(
+    MIN_PREVIEW_TABLE_SCROLL_HEIGHT,
+    Math.floor(viewportHeight * MOBILE_PREVIEW_TABLE_MAX_HEIGHT_RATIO),
+  );
 }
 
 function previewPageBodyClientHeight(body: HTMLDivElement): number {
