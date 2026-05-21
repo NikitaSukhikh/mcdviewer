@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "packages/parser"
+  ],
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "tsc && vite build",
+    "build": "npm run build --workspace @mcd/parser && tsc && vite build",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
