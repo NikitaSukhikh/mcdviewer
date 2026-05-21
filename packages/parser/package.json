@@ -1,0 +1,21 @@
+{
+  "name": "@mcd/parser",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "MCD (Markdown CSV Document) parser for TypeScript/JavaScript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
+  "keywords": [
+    "mcd",
+    "markdown",
+    "csv",
+    "document",
+    "parser"
+  ],
+  "license": "Apache-2.0"
+}

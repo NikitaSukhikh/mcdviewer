@@ -1,0 +1,24 @@
+{
+  "name": "@mcd/viewer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@mcd/parser": "file:packages/parser",
+    "dompurify": "^3.2.6",
+    "jszip": "^3.10.1",
+    "katex": "^0.16.47",
+    "marked": "^15.0.12",
+    "papaparse": "^5.5.3"
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.3.15",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

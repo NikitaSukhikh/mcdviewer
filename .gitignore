@@ -1,0 +1,5 @@
+/node_modules/
+/dist/
+/.vercel/
+packages/*/node_modules/
+*.log
