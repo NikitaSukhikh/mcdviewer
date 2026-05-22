@@ -5,6 +5,7 @@ import {
   type SourceSpan,
   type ValidationResult,
 } from "@mcd/parser";
+import { inject as injectVercelAnalytics } from "@vercel/analytics";
 import DOMPurify from "dompurify";
 import JSZip from "jszip";
 import katex from "katex";
@@ -430,6 +431,8 @@ if (!foundApp) {
   throw new Error("Missing #app root.");
 }
 const app = foundApp;
+
+injectVercelAnalytics({ framework: "vite" });
 
 if (isLegacyAboutRoute()) {
   window.history.replaceState({}, "", ABOUT_PATH);

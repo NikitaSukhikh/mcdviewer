@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@mcd/parser": "file:packages/parser",
+    "@vercel/analytics": "^2.0.1",
     "dompurify": "^3.2.6",
     "jszip": "^3.10.1",
     "katex": "^0.16.47",
