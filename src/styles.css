@@ -1479,6 +1479,7 @@ textarea {
   z-index: 1;
 }
 
+.mcd-about-brand-group,
 .mcd-about-brand,
 .mcd-about-nav-link {
   align-items: center;
@@ -1492,6 +1493,30 @@ textarea {
 
 .mcd-about-brand span {
   line-height: 1;
+}
+
+.mcd-about-brand-group {
+  gap: 8px;
+}
+
+.mcd-about-credit {
+  color: rgb(236 254 255 / 82%);
+  font-size: 13px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mcd-about-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.mcd-about-credit a:hover,
+.mcd-about-credit a:focus-visible {
+  color: #d9f99d;
+  outline: none;
 }
 
 .mcd-about-nav-actions {
@@ -2076,7 +2101,7 @@ textarea {
   }
 
   .mcd-about-nav {
-    align-items: flex-start;
+    align-items: center;
     left: 14px;
     right: 14px;
     top: 14px;
@@ -2085,6 +2110,14 @@ textarea {
   .mcd-about-brand,
   .mcd-about-desktop-viewer-link {
     display: none;
+  }
+
+  .mcd-about-brand-group {
+    display: inline-flex;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .mcd-about-mobile-viewer-link {

@@ -1783,9 +1783,14 @@ function aboutPageHtml(): string {
     <main class="mcd-about-page">
       <header class="mcd-about-nav" aria-label="MCD site navigation">
         <a class="mcd-about-nav-link mcd-about-mobile-viewer-link" href="${VIEWER_PATH}">Open Viewer</a>
-        <a class="mcd-about-brand" href="/">
-          <img class="brand-logo" src="/MCD_logo_tight.png" alt="MCD" />
-        </a>
+        <div class="mcd-about-brand-group">
+          <a class="mcd-about-brand" href="/" aria-label="Go to MCD home">
+            <img class="brand-logo" src="/MCD_logo_tight.png" alt="MCD" />
+          </a>
+          <span class="mcd-about-credit">
+            by <a href="https://aibeaver.co" rel="noopener noreferrer">AI Beaver</a>
+          </span>
+        </div>
         <div class="mcd-about-nav-actions">
           <a class="mcd-about-nav-link mcd-about-desktop-viewer-link" href="${VIEWER_PATH}">Open Viewer</a>
           <a
