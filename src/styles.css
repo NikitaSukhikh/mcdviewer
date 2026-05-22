@@ -65,9 +65,11 @@ button:disabled {
 
 .brand {
   align-items: flex-end;
+  color: inherit;
   display: flex;
   gap: 3px;
   min-width: 0;
+  text-decoration: none;
 }
 
 .brand-logo {
@@ -84,7 +86,7 @@ button:disabled {
 
 .file-name {
   color: #62727f;
-  font-size: 13px;
+  font-size: 14px;
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;
@@ -619,7 +621,7 @@ textarea {
 }
 
 .item-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   min-width: 0;
   overflow-wrap: anywhere;
@@ -1465,6 +1467,7 @@ textarea {
 .mcd-about-nav {
   align-items: center;
   display: flex;
+  font-size: 14px;
   gap: 16px;
   justify-content: space-between;
   left: 18px;
@@ -1481,6 +1484,7 @@ textarea {
   align-items: center;
   color: #ecfeff;
   display: inline-flex;
+  font-size: inherit;
   font-weight: 700;
   gap: 4px;
   text-decoration: none;
@@ -1501,6 +1505,10 @@ textarea {
   border-radius: 8px;
   min-height: 38px;
   padding: 8px 12px;
+}
+
+.mcd-about-mobile-viewer-link {
+  display: none;
 }
 
 .mcd-about-github-link {
@@ -1546,10 +1554,12 @@ textarea {
 }
 
 .mcd-about-page-window {
+  display: flex;
+  flex-direction: column;
   max-height: none;
   max-width: none;
   min-height: 100vh;
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
 }
 
@@ -1566,7 +1576,9 @@ textarea {
 }
 
 .mcd-about-header,
+.mcd-about-main,
 .mcd-about-grid,
+.mcd-about-bottom-stack,
 .mcd-about-bottom-lede {
   margin-left: auto;
   margin-right: auto;
@@ -1575,37 +1587,16 @@ textarea {
 
 .mcd-about-popup .mcd-popup-title {
   align-items: center;
-  display: grid;
-  gap: 7px;
-  font-size: 42px;
-  justify-content: center;
-  line-height: 0.98;
+  display: block;
+  font-size: 36px;
+  line-height: 1.16;
   margin: 0;
-  max-width: none;
+  max-width: 19ch;
   text-align: center;
 }
 
-.mcd-about-title-line {
-  align-items: center;
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  max-width: 100%;
-}
-
-.mcd-about-title-subline {
-  color: #ecfeff;
-  display: block;
-  font-size: 0.82em;
-  overflow-wrap: anywhere;
-}
-
-.mcd-about-title-logo {
-  display: block;
-  flex: 0 0 auto;
-  height: 0.92em;
-  width: auto;
+.mcd-title-nowrap {
+  white-space: nowrap;
 }
 
 .mcd-about-grid {
@@ -1613,6 +1604,14 @@ textarea {
   gap: 14px;
   grid-template-columns: minmax(0, 1.35fr) repeat(2, minmax(0, 0.82fr));
   position: relative;
+  z-index: 1;
+}
+
+.mcd-about-bottom-stack {
+  margin-top: auto;
+  padding-top: 28px;
+  position: relative;
+  width: 100%;
   z-index: 1;
 }
 
@@ -1627,33 +1626,83 @@ textarea {
 .mcd-about-hero > div {
   display: grid;
   justify-items: center;
+  padding-top: 28px;
 }
 
 .mcd-about-capability-grid {
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
+  justify-content: flex-start;
+  margin: 4px 0 18px;
+  max-width: min(100%, 720px);
+  overflow: hidden;
+  position: relative;
+  width: min(100%, 720px);
 }
 
-.mcd-about-capability-grid span {
+.mcd-about-capability-grid::before,
+.mcd-about-capability-grid::after {
+  bottom: 0;
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 56px;
+  z-index: 1;
+}
+
+.mcd-about-capability-grid::before {
+  background: linear-gradient(90deg, #0b1114, transparent);
+  left: 0;
+}
+
+.mcd-about-capability-grid::after {
+  background: linear-gradient(270deg, #0b1114, transparent);
+  right: 0;
+}
+
+.mcd-about-capability-track {
+  animation: mcdCapabilityCarousel 18s linear infinite;
+  display: flex;
+  flex: 0 0 max-content;
+  gap: 30px;
+  white-space: nowrap;
+}
+
+.mcd-about-capability-track span {
   border: 1px solid rgb(163 230 53 / 40%);
   color: #d9f99d;
   font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 11px;
   font-weight: 700;
   padding: 5px 8px;
+  position: relative;
 }
 
-.mcd-about-capability-grid {
-  justify-content: center;
-  margin: 4px 0 18px;
-  max-width: 520px;
-}
-
-.mcd-about-capability-grid span {
+.mcd-about-capability-track span {
   background: rgb(236 254 255 / 6%);
   font-size: 14px;
   padding: 8px 10px;
+}
+
+.mcd-about-capability-track span::after {
+  color: #d9f99d;
+  content: "+";
+  left: calc(100% + 12px);
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes mcdCapabilityCarousel {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 15px));
+  }
 }
 
 .mcd-about-lede {
@@ -2023,7 +2072,7 @@ textarea {
   .mcd-about-page-window {
     max-height: none;
     min-height: 100dvh;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .mcd-about-nav {
@@ -2033,9 +2082,23 @@ textarea {
     top: 14px;
   }
 
+  .mcd-about-brand,
+  .mcd-about-desktop-viewer-link {
+    display: none;
+  }
+
+  .mcd-about-mobile-viewer-link {
+    display: inline-flex;
+  }
+
   .mcd-about-grid,
   .mcd-about-hero {
     grid-template-columns: 1fr;
+  }
+
+  .mcd-about-popup .mcd-popup-title {
+    font-size: clamp(22px, 6.6vw, 27px);
+    max-width: 100%;
   }
 
   .mcd-about-lede {

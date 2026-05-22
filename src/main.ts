@@ -17,7 +17,9 @@ import "./styles.css";
 const MCD_MIMETYPE = "application/vnd.mcd+zip";
 const UNSAVED_CHANGES_PROMPT = "Save changes?";
 const DEFAULT_ENTRYPOINT = "content/main.md";
-const ABOUT_PATH = "/about";
+const ABOUT_PATH = "/";
+const LEGACY_ABOUT_PATH = "/about";
+const VIEWER_PATH = "/viewer";
 const HISTORY_LIMIT = 20;
 const HISTORY_GROUP_IDLE_MS = 1200;
 const EMPTY_FIRST_HEADING_ID = "mcd-empty-first-heading";
@@ -429,14 +431,18 @@ if (!foundApp) {
 }
 const app = foundApp;
 
+if (isLegacyAboutRoute()) {
+  window.history.replaceState({}, "", ABOUT_PATH);
+}
+
 app.innerHTML = `
   ${isAboutRoute() ? aboutPageHtml() : ""}
   <div class="app-shell"${isAboutRoute() ? ' hidden aria-hidden="true"' : ""}>
     <header class="topbar">
-      <div class="brand">
+      <a class="brand" href="/" aria-label="Go to MCD home">
         <img class="brand-logo" src="/MCD_logo_tight.png" alt="MCD" />
         <div class="brand-title">Viewer</div>
-      </div>
+      </a>
       <div class="file-name" id="fileName"></div>
       <div class="toolbar">
         <button id="openButton" type="button">Upload</button>
@@ -1721,6 +1727,10 @@ function showInitialRouteModal(): void {
 }
 
 function syncRouteModal(): void {
+  if (isLegacyAboutRoute()) {
+    window.history.replaceState({}, "", ABOUT_PATH);
+  }
+
   if (isAboutRoute()) {
     showAboutPageRoute();
     return;
@@ -1737,6 +1747,10 @@ function syncRouteModal(): void {
 
 function isAboutRoute(): boolean {
   return normalizedPathname() === ABOUT_PATH;
+}
+
+function isLegacyAboutRoute(): boolean {
+  return normalizedPathname() === LEGACY_ABOUT_PATH;
 }
 
 function normalizedPathname(): string {
@@ -1765,12 +1779,12 @@ function aboutPageHtml(): string {
   return `
     <main class="mcd-about-page">
       <header class="mcd-about-nav" aria-label="MCD site navigation">
+        <a class="mcd-about-nav-link mcd-about-mobile-viewer-link" href="${VIEWER_PATH}">Open Viewer</a>
         <a class="mcd-about-brand" href="/">
           <img class="brand-logo" src="/MCD_logo_tight.png" alt="MCD" />
-          <span>Viewer</span>
         </a>
         <div class="mcd-about-nav-actions">
-          <a class="mcd-about-nav-link" href="/">Open viewer</a>
+          <a class="mcd-about-nav-link mcd-about-desktop-viewer-link" href="${VIEWER_PATH}">Open Viewer</a>
           <a
             class="mcd-about-github-link"
             href="https://github.com/NikitaSukhikh/mcd"
@@ -1785,33 +1799,38 @@ function aboutPageHtml(): string {
       <section class="mcd-marketing-popup mcd-about-popup mcd-about-page-window" aria-labelledby="aboutPageTitle">
         <div class="mcd-marketing-header mcd-about-header">
           <div>
-            <div class="mcd-marketing-kicker">MCD format / portable documents</div>
+            <div class="mcd-marketing-kicker">For document-heavy workflows</div>
             <h1 class="mcd-popup-title" id="aboutPageTitle">
-              <span class="mcd-about-title-line">
-                <img class="mcd-about-title-logo" src="/MCD_logo_tight.png" alt="MCD" />
-                <span>File Format for Complex Data</span>
-              </span>
-              <span class="mcd-about-title-subline">fully Human/AI Readable</span>
+              .MCD: file format for <span class="mcd-title-nowrap">complex mixed-content data</span> Human/AI Readable
             </h1>
           </div>
         </div>
-        <div class="mcd-about-grid">
+        <div class="mcd-about-main">
           <section class="mcd-about-hero" aria-label="MCD introduction">
             <div>
               <div class="mcd-about-capability-grid" aria-label="Format capabilities">
-                <span>Markdown narrative</span>
-                <span>CSV-backed tables</span>
-                <span>JSON schemas</span>
-                <span>Images</span>
-                <span>Annotations</span>
-                <span>Layout hints</span>
+                <div class="mcd-about-capability-track">
+                  <span>Plain Text/Formulas</span>
+                  <span>Tables</span>
+                  <span>Doc Schemas</span>
+                  <span>Images</span>
+                  <span>Annotations</span>
+                  <span aria-hidden="true">Plain Text/Formulas</span>
+                  <span aria-hidden="true">Tables</span>
+                  <span aria-hidden="true">Doc Schemas</span>
+                  <span aria-hidden="true">Images/Charts</span>
+                  <span aria-hidden="true">Annotations/Version Control</span>
+                </div>
               </div>
               <div class="mcd-about-actions">
                 <button class="mcd-about-button is-primary" type="button" data-action="show-samples">Load sample</button>
-                <a class="mcd-about-button" href="/">Open viewer</a>
+                <a class="mcd-about-button" href="${VIEWER_PATH}">Open viewer</a>
               </div>
             </div>
           </section>
+        </div>
+        <div class="mcd-about-bottom-stack">
+          <div class="mcd-about-grid">
           <section class="mcd-about-terminal" aria-label="MCD package shape">
             <div class="mcd-about-terminal-bar">
               <span></span>
@@ -1841,12 +1860,13 @@ annotations/review-note.annotation.json</code></pre>
               that remain human-readable, machine-checkable, and easy to archive.
             </p>
           </section>
+          </div>
+          <p class="mcd-about-lede mcd-about-bottom-lede">
+            .mcd is a file format for work that needs readable narrative, structured data,
+            images, charts, and review notes to travel together, 
+            that both humans and AI agents understand fast and reliably.
+          </p>
         </div>
-        <p class="mcd-about-lede mcd-about-bottom-lede">
-          .mcd is a file format for work that needs readable narrative, structured data,
-          images, charts, and review notes to travel together, 
-          that both humans and AI agents understand fast and reliably.
-        </p>
       </section>
     </main>
   `;
@@ -1870,7 +1890,7 @@ function showViewerShell(): void {
     shell.hidden = false;
     shell.removeAttribute("aria-hidden");
   }
-  window.history.pushState({}, "", "/");
+  window.history.pushState({}, "", VIEWER_PATH);
   document.title = "MCD Viewer";
 }
 
@@ -5759,7 +5779,7 @@ function showMarketingPopup(
       <div class="mcd-marketing-links">
         ${
           includeAboutLink
-            ? `<a class="mcd-marketing-link mcd-marketing-link-about" href="/about" data-action="about">
+            ? `<a class="mcd-marketing-link mcd-marketing-link-about" href="${ABOUT_PATH}" data-action="about">
           What is MCD?
         </a>`
             : ""
