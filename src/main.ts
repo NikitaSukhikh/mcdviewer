@@ -17,12 +17,12 @@ import "./styles.css";
 const MCD_MIMETYPE = "application/vnd.mcd+zip";
 const UNSAVED_CHANGES_PROMPT = "Save changes?";
 const DEFAULT_ENTRYPOINT = "content/main.md";
+const ABOUT_PATH = "/about";
 const HISTORY_LIMIT = 20;
 const HISTORY_GROUP_IDLE_MS = 1200;
 const EMPTY_FIRST_HEADING_ID = "mcd-empty-first-heading";
 const RESERVED_ROW_HEADER_COLUMN = "row_header";
 const MIN_PREVIEW_TABLE_SCROLL_HEIGHT = 180;
-const MOBILE_PREVIEW_TABLE_MAX_HEIGHT_RATIO = 0.62;
 const LAZY_PREVIEW_TABLE_ROOT_MARGIN = 900;
 const VIRTUAL_TABLE_ROW_HEIGHT = 38;
 const VIRTUAL_TABLE_OVERSCAN_ROWS = 8;
@@ -30,7 +30,7 @@ const EDITOR_VIRTUAL_TABLE_ROW_HEIGHT = 35;
 const EDITOR_VIRTUAL_TABLE_OVERSCAN_ROWS = 8;
 const MARKETING_LINKS = [
   {
-    label: "The Lord of the Rings",
+    label: "The Lord of the Rings (Wikipedia page)",
     href: "/showcases/lord-of-the-rings.mcd",
     fileName: "lord-of-the-rings.mcd",
   },
@@ -414,6 +414,7 @@ let activeHistoryGroupKey: string | undefined;
 let historyGroupTimer: number | undefined;
 let savedContentKey = "";
 let activeModal: HTMLElement | undefined;
+let activeModalCloseBehavior: (() => void) | undefined;
 let previewAutoDoneTimer: number | undefined;
 let previewTableRepaginateFrame: number | undefined;
 let previewLazyTableObserver: IntersectionObserver | undefined;
@@ -422,13 +423,15 @@ let previewLazyTables: PreviewLazyTable[] = [];
 let previewVirtualTables = new WeakMap<HTMLDivElement, PreviewVirtualTable>();
 let editorVirtualTables = new WeakMap<HTMLDivElement, EditorVirtualTable>();
 
-const app = document.querySelector<HTMLDivElement>("#app");
-if (!app) {
+const foundApp = document.querySelector<HTMLDivElement>("#app");
+if (!foundApp) {
   throw new Error("Missing #app root.");
 }
+const app = foundApp;
 
 app.innerHTML = `
-  <div class="app-shell">
+  ${isAboutRoute() ? aboutPageHtml() : ""}
+  <div class="app-shell"${isAboutRoute() ? ' hidden aria-hidden="true"' : ""}>
     <header class="topbar">
       <div class="brand">
         <img class="brand-logo" src="/MCD_logo_tight.png" alt="MCD" />
@@ -503,6 +506,10 @@ app.innerHTML = `
     </div>
   </div>
 `;
+
+if (isAboutRoute()) {
+  setupAboutPage();
+}
 
 const fileNameEl = byId<HTMLDivElement>("fileName");
 const workspace = byId<HTMLElement>("workspace");
@@ -581,7 +588,7 @@ for (const button of saveButtons) {
 
 previewPane.addEventListener("scroll", syncFloatingActions);
 window.addEventListener("scroll", syncFloatingActions);
-window.addEventListener("resize", syncPreviewTableScrollers);
+window.addEventListener("resize", handlePreviewResize);
 
 window.addEventListener("beforeunload", (event) => {
   if (!state?.dirty) {
@@ -708,10 +715,11 @@ for (const tab of ["Text", "Tables", "Annotations"] as const) {
 }
 
 addAnnotationButton.addEventListener("click", () => {
-  armWordAnnotationPick();
+  createAnnotationAtVisiblePreviewPosition();
 });
 
-window.setTimeout(showMarketingPopup, 0);
+window.setTimeout(showInitialRouteModal, 0);
+window.addEventListener("popstate", syncRouteModal);
 
 function byId<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id);
@@ -1705,6 +1713,167 @@ function emptyDropZoneHtml(): string {
   </div>`;
 }
 
+function showInitialRouteModal(): void {
+  if (isAboutRoute()) {
+    return;
+  }
+  showMarketingPopup();
+}
+
+function syncRouteModal(): void {
+  if (isAboutRoute()) {
+    showAboutPageRoute();
+    return;
+  }
+
+  document.title = "MCD Viewer";
+  app.querySelector<HTMLElement>(".mcd-about-page")?.remove();
+  const shell = app.querySelector<HTMLElement>(".app-shell");
+  if (shell) {
+    shell.hidden = false;
+    shell.removeAttribute("aria-hidden");
+  }
+}
+
+function isAboutRoute(): boolean {
+  return normalizedPathname() === ABOUT_PATH;
+}
+
+function normalizedPathname(): string {
+  return window.location.pathname.replace(/\/+$/, "") || "/";
+}
+
+function navigateToAbout(): void {
+  window.location.assign(ABOUT_PATH);
+}
+
+function showAboutPageRoute(): void {
+  closeActiveModal({ runCloseBehavior: false });
+  if (!app.querySelector(".mcd-about-page")) {
+    app.insertAdjacentHTML("afterbegin", aboutPageHtml());
+    setupAboutPage();
+  }
+  const shell = app.querySelector<HTMLElement>(".app-shell");
+  if (shell) {
+    shell.hidden = true;
+    shell.setAttribute("aria-hidden", "true");
+  }
+  document.title = "About MCD | MCD Viewer";
+}
+
+function aboutPageHtml(): string {
+  return `
+    <main class="mcd-about-page">
+      <header class="mcd-about-nav" aria-label="MCD site navigation">
+        <a class="mcd-about-brand" href="/">
+          <img class="brand-logo" src="/MCD_logo_tight.png" alt="MCD" />
+          <span>Viewer</span>
+        </a>
+        <div class="mcd-about-nav-actions">
+          <a class="mcd-about-nav-link" href="/">Open viewer</a>
+          <a
+            class="mcd-about-github-link"
+            href="https://github.com/NikitaSukhikh/mcd"
+            aria-label="Open MCD on GitHub"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img src="/GitHub_icon.png" alt="" />
+          </a>
+        </div>
+      </header>
+      <section class="mcd-marketing-popup mcd-about-popup mcd-about-page-window" aria-labelledby="aboutPageTitle">
+        <div class="mcd-marketing-header mcd-about-header">
+          <div>
+            <div class="mcd-marketing-kicker">MCD format / portable documents</div>
+            <h1 class="mcd-popup-title" id="aboutPageTitle">
+              <span class="mcd-about-title-line">
+                <img class="mcd-about-title-logo" src="/MCD_logo_tight.png" alt="MCD" />
+                <span>File Format for Complex Data</span>
+              </span>
+              <span class="mcd-about-title-subline">fully Human/AI Readable</span>
+            </h1>
+          </div>
+        </div>
+        <div class="mcd-about-grid">
+          <section class="mcd-about-hero" aria-label="MCD introduction">
+            <div>
+              <div class="mcd-about-capability-grid" aria-label="Format capabilities">
+                <span>Markdown narrative</span>
+                <span>CSV-backed tables</span>
+                <span>JSON schemas</span>
+                <span>Images</span>
+                <span>Annotations</span>
+                <span>Layout hints</span>
+              </div>
+              <div class="mcd-about-actions">
+                <button class="mcd-about-button is-primary" type="button" data-action="show-samples">Load sample</button>
+                <a class="mcd-about-button" href="/">Open viewer</a>
+              </div>
+            </div>
+          </section>
+          <section class="mcd-about-terminal" aria-label="MCD package shape">
+            <div class="mcd-about-terminal-bar">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <pre><code>mimetype
+manifest.json
+content/main.md
+tables/revenue.csv
+tables/revenue.schema.json
+images/process-diagram.image.json
+annotations/review-note.annotation.json</code></pre>
+          </section>
+          <section class="mcd-about-panel">
+            <div class="mcd-about-panel-label">Why it exists</div>
+            <p>
+              PDFs are easy to read for humans, but prone to errors for AI agents. Spreadsheets lose context. Plain Markdown cannot carry
+              validated tables or annotations. MCD keeps the parts simple and bundles them as one
+              local-first file.
+            </p>
+          </section>
+          <section class="mcd-about-panel">
+            <div class="mcd-about-panel-label">Who it helps</div>
+            <p>
+              Analysts, engineers, operators, publishers, and AI workflows can exchange reports
+              that remain human-readable, machine-checkable, and easy to archive.
+            </p>
+          </section>
+        </div>
+        <p class="mcd-about-lede mcd-about-bottom-lede">
+          .mcd is a file format for work that needs readable narrative, structured data,
+          images, charts, and review notes to travel together, 
+          that both humans and AI agents understand fast and reliably.
+        </p>
+      </section>
+    </main>
+  `;
+}
+
+function setupAboutPage(): void {
+  document.title = "About MCD | MCD Viewer";
+  app.querySelector<HTMLButtonElement>('[data-action="show-samples"]')?.addEventListener("click", (event) => {
+    event.preventDefault();
+    showMarketingPopup({
+      includeAboutLink: false,
+      beforeOpenShowcase: showViewerShell,
+    });
+  });
+}
+
+function showViewerShell(): void {
+  app.querySelector<HTMLElement>(".mcd-about-page")?.remove();
+  const shell = app.querySelector<HTMLElement>(".app-shell");
+  if (shell) {
+    shell.hidden = false;
+    shell.removeAttribute("aria-hidden");
+  }
+  window.history.pushState({}, "", "/");
+  document.title = "MCD Viewer";
+}
+
 function setActiveTab(tab: ActiveTab): void {
   activeTab = tab;
   for (const name of ["text", "tables", "annotations"] as const) {
@@ -1900,9 +2069,10 @@ function setupEditorVirtualTable(
   tableWrap.addEventListener(
     "scroll",
     () => {
-      if (tableWrap.contains(document.activeElement)) {
+      if (hasActiveTextEditor(tableWrap)) {
         return;
       }
+      stabilizeVirtualTableFocus(tableWrap);
       renderVirtualEditorTableRows(virtualTable);
     },
     { passive: true },
@@ -2948,6 +3118,51 @@ function syncAnnotationPickUi(): void {
   quickAnnotationButton.setAttribute("aria-pressed", annotationWordPickArmed ? "true" : "false");
   addAnnotationButton.setAttribute("aria-pressed", annotationWordPickArmed ? "true" : "false");
   preview.classList.toggle("is-annotation-pick-mode", annotationWordPickArmed);
+}
+
+function createAnnotationAtVisiblePreviewPosition(): void {
+  if (!state) {
+    return;
+  }
+
+  cancelWordAnnotationPick();
+  const location = visiblePreviewAnnotationLocation();
+  const sourceLine =
+    sourceLineForRenderedLogicalPageLine(location.page, location.line) ??
+    sourceLineForPageLine(state.markdown, location.page, location.line, state.pageMap);
+  createAnnotationAtSourceLine(sourceLine, location);
+  setStatus("Created annotation. Adjust the page, line, target JSON, or body as needed.");
+}
+
+function visiblePreviewAnnotationLocation(): AnnotationPageLocation {
+  const page = visiblePreviewPage();
+  return {
+    page,
+    line: 1,
+    top: 0,
+    renderedPage: page,
+  };
+}
+
+function visiblePreviewPage(): number {
+  const pages = Array.from(preview.querySelectorAll<HTMLElement>(".preview-page"));
+  if (pages.length === 0) {
+    return 1;
+  }
+
+  const viewport = previewPane.getBoundingClientRect();
+  let bestPage = pages[0];
+  let bestVisibleHeight = Number.NEGATIVE_INFINITY;
+  for (const page of pages) {
+    const rect = page.getBoundingClientRect();
+    const visibleHeight = Math.min(rect.bottom, viewport.bottom) - Math.max(rect.top, viewport.top);
+    if (visibleHeight > bestVisibleHeight) {
+      bestVisibleHeight = visibleHeight;
+      bestPage = page;
+    }
+  }
+
+  return Number(bestPage?.dataset.pageNumber) || 1;
 }
 
 function schedulePreviewEditAutoDone(): void {
@@ -5528,7 +5743,10 @@ function showImagePopup(insertLine: number, target: InsertLineTarget): void {
   fileInput?.focus();
 }
 
-function showMarketingPopup(): void {
+function showMarketingPopup(
+  options: { includeAboutLink?: boolean; beforeOpenShowcase?: () => void } = {},
+): void {
+  const includeAboutLink = options.includeAboutLink ?? true;
   showModal(`
     <div class="mcd-popup mcd-marketing-popup" role="dialog" aria-modal="true" aria-labelledby="marketingPopupTitle">
       <div class="mcd-popup-header mcd-marketing-header">
@@ -5539,6 +5757,13 @@ function showMarketingPopup(): void {
         <button class="mcd-popup-close" type="button" data-action="close" aria-label="Close">&times;</button>
       </div>
       <div class="mcd-marketing-links">
+        ${
+          includeAboutLink
+            ? `<a class="mcd-marketing-link mcd-marketing-link-about" href="/about" data-action="about">
+          What is MCD?
+        </a>`
+            : ""
+        }
         ${MARKETING_LINKS.map(
           (link) => `
             <a class="mcd-marketing-link" href="${escapeAttr(link.href)}" data-showcase-file="${escapeAttr(link.fileName)}">
@@ -5550,9 +5775,17 @@ function showMarketingPopup(): void {
     </div>
   `);
   activeModal?.classList.add("mcd-marketing-backdrop");
+  activeModal?.querySelector<HTMLAnchorElement>('[data-action="about"]')?.addEventListener("click", (event) => {
+    event.preventDefault();
+    navigateToAbout();
+  });
   for (const link of Array.from(activeModal?.querySelectorAll<HTMLAnchorElement>(".mcd-marketing-link") ?? [])) {
+    if (!link.dataset.showcaseFile) {
+      continue;
+    }
     link.addEventListener("click", (event) => {
       event.preventDefault();
+      options.beforeOpenShowcase?.();
       void openShowcase(link.href, link.dataset.showcaseFile ?? "showcase.mcd");
     });
   }
@@ -5576,24 +5809,33 @@ async function openShowcase(url: string, fileName: string): Promise<void> {
   }
 }
 
-function showModal(html: string): void {
-  closeActiveModal();
+function showModal(
+  html: string,
+  options: { onClose?: () => void; lockBackdrop?: boolean } = {},
+): void {
+  closeActiveModal({ runCloseBehavior: false });
   const backdrop = document.createElement("div");
   backdrop.className = "mcd-popup-backdrop";
   backdrop.innerHTML = html;
   backdrop.addEventListener("click", (event) => {
-    if (event.target === backdrop) {
+    if (!options.lockBackdrop && event.target === backdrop) {
       closeActiveModal();
     }
   });
-  backdrop.querySelector('[data-action="close"]')?.addEventListener("click", closeActiveModal);
+  backdrop.querySelector('[data-action="close"]')?.addEventListener("click", () => closeActiveModal());
   activeModal = backdrop;
+  activeModalCloseBehavior = options.onClose;
   document.body.appendChild(backdrop);
 }
 
-function closeActiveModal(): void {
+function closeActiveModal(options: { runCloseBehavior?: boolean } = {}): void {
+  const closeBehavior = activeModalCloseBehavior;
   activeModal?.remove();
   activeModal = undefined;
+  activeModalCloseBehavior = undefined;
+  if (options.runCloseBehavior !== false) {
+    closeBehavior?.();
+  }
 }
 
 function quantityFromForm(value: FormDataEntryValue | null, min: number, max: number, fallback: number): number {
@@ -5898,6 +6140,22 @@ function renderPagedPreview(html: string, annotationItems: AnnotationPreviewItem
   updatePageMapMetadata(pageNumber, annotationPreviewPageNumber());
 }
 
+function hasActiveTextEditor(container: HTMLElement): boolean {
+  const active = document.activeElement;
+  return (
+    active instanceof HTMLElement &&
+    container.contains(active) &&
+    (active.isContentEditable || active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement)
+  );
+}
+
+function stabilizeVirtualTableFocus(container: HTMLElement): void {
+  const active = document.activeElement;
+  if (active instanceof HTMLElement && active !== container && container.contains(active)) {
+    container.focus({ preventScroll: true });
+  }
+}
+
 function prepareLazyTablePlaceholders(root: DocumentFragment): void {
   for (const figure of Array.from(
     root.querySelectorAll<HTMLElement>(".mcd-lazy-table[data-mcd-lazy-table-index]"),
@@ -6049,9 +6307,10 @@ function renderLazyPreviewTable(figure: HTMLElement): void {
   wrapper.addEventListener(
     "scroll",
     () => {
-      if (wrapper.contains(document.activeElement)) {
+      if (hasActiveTextEditor(wrapper)) {
         return;
       }
+      stabilizeVirtualTableFocus(wrapper);
       renderVirtualPreviewTableRows(virtualTable);
     },
     { passive: true },
@@ -6241,11 +6500,13 @@ function repaginatePreview(): void {
 }
 
 function repaginatePreviewWithScrollableTables(): void {
+  const scrollAnchor = capturePreviewScrollAnchor();
   syncPreviewTableScrollers();
   repaginatePreview();
   syncPreviewTableScrollers();
   repaginatePreview();
   syncPreviewTableScrollers();
+  restorePreviewScrollAnchor(scrollAnchor);
 }
 
 function schedulePreviewTableRepagination(): void {
@@ -6264,6 +6525,75 @@ function schedulePreviewTableRepagination(): void {
       renderAnnotationsEditor();
     }
   });
+}
+
+interface PreviewScrollAnchor {
+  element: HTMLElement;
+  top: number;
+  root: HTMLElement | Window;
+}
+
+function capturePreviewScrollAnchor(): PreviewScrollAnchor | undefined {
+  if (!preview.isConnected || preview.childElementCount === 0) {
+    return undefined;
+  }
+
+  const root = previewScrollRoot();
+  const viewport = previewViewportRect(root);
+  const targetTop = viewport.top + Math.min(120, Math.max(24, viewport.height * 0.16));
+  const candidates = Array.from(preview.querySelectorAll<HTMLElement>(".preview-page-body > *"));
+  const visible = candidates
+    .map((element) => ({ element, rect: element.getBoundingClientRect() }))
+    .filter(({ rect }) => rect.bottom > viewport.top && rect.top < viewport.bottom)
+    .sort((a, b) => Math.abs(a.rect.top - targetTop) - Math.abs(b.rect.top - targetTop));
+  const anchor = visible[0];
+  if (!anchor) {
+    return undefined;
+  }
+
+  return {
+    element: anchor.element,
+    top: anchor.rect.top,
+    root,
+  };
+}
+
+function restorePreviewScrollAnchor(anchor: PreviewScrollAnchor | undefined): void {
+  if (!anchor?.element.isConnected) {
+    return;
+  }
+
+  const delta = anchor.element.getBoundingClientRect().top - anchor.top;
+  if (Math.abs(delta) < 1) {
+    return;
+  }
+
+  if (anchor.root instanceof Window) {
+    anchor.root.scrollBy({ top: delta, left: 0, behavior: "auto" });
+  } else {
+    anchor.root.scrollTop += delta;
+  }
+}
+
+function previewScrollRoot(): HTMLElement | Window {
+  return previewPane.scrollHeight > previewPane.clientHeight + 1 ? previewPane : window;
+}
+
+function previewViewportRect(root: HTMLElement | Window): { top: number; bottom: number; height: number } {
+  if (root instanceof Window) {
+    return {
+      top: 0,
+      bottom: root.innerHeight,
+      height: root.innerHeight,
+    };
+  }
+
+  const rect = root.getBoundingClientRect();
+  return {
+    top: rect.top,
+    bottom: rect.bottom,
+    height: rect.height,
+  };
 }
 
 function paginateNodes(nodes: Node[]): number {
@@ -6526,6 +6856,14 @@ function syncPreviewTableScrollers(): void {
   }
 }
 
+function handlePreviewResize(): void {
+  syncPreviewTableScrollers();
+  syncFloatingActions();
+  if (state && preview.querySelector(".preview-page")) {
+    schedulePreviewTableRepagination();
+  }
+}
+
 function syncPreviewTableScrollState(wrapper: HTMLDivElement): void {
   syncPreviewTableMaxHeight(wrapper);
 
@@ -6557,20 +6895,7 @@ function syncPreviewTableMaxHeight(wrapper: HTMLDivElement): void {
     return;
   }
 
-  const mobileMaxHeight = mobilePreviewTableMaxHeight();
-  const maxHeight = mobileMaxHeight === undefined ? availableHeight : Math.min(availableHeight, mobileMaxHeight);
-  wrapper.style.maxHeight = `${maxHeight}px`;
-}
-
-function mobilePreviewTableMaxHeight(): number | undefined {
-  if (!window.matchMedia("(max-width: 860px)").matches) {
-    return undefined;
-  }
-  const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
-  return Math.max(
-    MIN_PREVIEW_TABLE_SCROLL_HEIGHT,
-    Math.floor(viewportHeight * MOBILE_PREVIEW_TABLE_MAX_HEIGHT_RATIO),
-  );
+  wrapper.style.maxHeight = `${availableHeight}px`;
 }
 
 function previewPageBodyClientHeight(body: HTMLDivElement): number {

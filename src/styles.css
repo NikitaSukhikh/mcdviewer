@@ -11,6 +11,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   min-width: 320px;
@@ -638,6 +642,7 @@ textarea {
   max-height: clamp(220px, 46vh, 520px);
   min-width: 0;
   overflow: auto;
+  overflow-anchor: none;
   position: relative;
   scrollbar-color: #9aa8b2 #edf1f4;
   scrollbar-gutter: stable;
@@ -933,6 +938,7 @@ textarea {
   outline: none;
   overflow-x: auto;
   overflow-y: auto;
+  overflow-anchor: none;
   padding-bottom: 8px;
   position: relative;
   scrollbar-color: #8c9aa5 #edf1f4;
@@ -1079,6 +1085,7 @@ textarea {
 
 .mcd-virtual-table-spacer td {
   background: transparent;
+  overflow-anchor: none;
 }
 
 .inline-edit-target {
@@ -1413,6 +1420,10 @@ textarea {
   margin-left: 14px;
 }
 
+.mcd-marketing-link-about::after {
+  content: "ABOUT";
+}
+
 .mcd-marketing-link:hover,
 .mcd-marketing-link:focus-visible {
   background:
@@ -1422,6 +1433,349 @@ textarea {
   box-shadow: 0 0 22px rgb(163 230 53 / 14%);
   outline: none;
   transform: translateY(-1px);
+}
+
+.mcd-about-backdrop {
+  padding: 18px;
+}
+
+.mcd-about-page {
+  background:
+    linear-gradient(rgb(4 10 13 / 84%), rgb(4 10 13 / 84%)),
+    repeating-linear-gradient(
+      90deg,
+      rgb(103 232 249 / 10%) 0,
+      rgb(103 232 249 / 10%) 1px,
+      transparent 1px,
+      transparent 42px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgb(163 230 53 / 8%) 0,
+      rgb(163 230 53 / 8%) 1px,
+      transparent 1px,
+      transparent 42px
+  );
+  display: block;
+  min-height: 100vh;
+  padding: 0;
+  position: relative;
+}
+
+.mcd-about-nav {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  left: 18px;
+  max-width: none;
+  position: absolute;
+  right: 18px;
+  top: 14px;
+  width: auto;
+  z-index: 1;
+}
+
+.mcd-about-brand,
+.mcd-about-nav-link {
+  align-items: center;
+  color: #ecfeff;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 4px;
+  text-decoration: none;
+}
+
+.mcd-about-brand span {
+  line-height: 1;
+}
+
+.mcd-about-nav-actions {
+  align-items: center;
+  display: inline-flex;
+  gap: 10px;
+}
+
+.mcd-about-nav-link {
+  border: 1px solid rgb(103 232 249 / 44%);
+  border-radius: 8px;
+  min-height: 38px;
+  padding: 8px 12px;
+}
+
+.mcd-about-github-link {
+  align-items: center;
+  background: #ecfeff;
+  border: 1px solid rgb(103 232 249 / 44%);
+  border-radius: 8px;
+  display: inline-flex;
+  height: 38px;
+  justify-content: center;
+  padding: 7px;
+  width: 38px;
+}
+
+.mcd-about-github-link img {
+  display: block;
+  height: 22px;
+  width: 22px;
+}
+
+.mcd-about-nav-link:hover,
+.mcd-about-nav-link:focus-visible {
+  background: rgb(103 232 249 / 14%);
+  border-color: #67e8f9;
+  outline: none;
+}
+
+.mcd-about-github-link:hover,
+.mcd-about-github-link:focus-visible {
+  background: #d9f99d;
+  border-color: #67e8f9;
+  outline: none;
+}
+
+.mcd-about-popup {
+  max-height: none;
+  max-width: none;
+  overflow: auto;
+  padding: 76px 14px 14px;
+  scrollbar-color: #67e8f9 #0b1114;
+  scrollbar-width: thin;
+  width: 100%;
+}
+
+.mcd-about-page-window {
+  max-height: none;
+  max-width: none;
+  min-height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+
+.mcd-about-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.mcd-about-header > div {
+  min-width: 0;
+  width: 100%;
+}
+
+.mcd-about-header,
+.mcd-about-grid,
+.mcd-about-bottom-lede {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1080px;
+}
+
+.mcd-about-popup .mcd-popup-title {
+  align-items: center;
+  display: grid;
+  gap: 7px;
+  font-size: 42px;
+  justify-content: center;
+  line-height: 0.98;
+  margin: 0;
+  max-width: none;
+  text-align: center;
+}
+
+.mcd-about-title-line {
+  align-items: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.mcd-about-title-subline {
+  color: #ecfeff;
+  display: block;
+  font-size: 0.82em;
+  overflow-wrap: anywhere;
+}
+
+.mcd-about-title-logo {
+  display: block;
+  flex: 0 0 auto;
+  height: 0.92em;
+  width: auto;
+}
+
+.mcd-about-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1.35fr) repeat(2, minmax(0, 0.82fr));
+  position: relative;
+  z-index: 1;
+}
+
+.mcd-about-hero {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
+}
+
+.mcd-about-hero > div {
+  display: grid;
+  justify-items: center;
+}
+
+.mcd-about-capability-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mcd-about-capability-grid span {
+  border: 1px solid rgb(163 230 53 / 40%);
+  color: #d9f99d;
+  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 8px;
+}
+
+.mcd-about-capability-grid {
+  justify-content: center;
+  margin: 4px 0 18px;
+  max-width: 520px;
+}
+
+.mcd-about-capability-grid span {
+  background: rgb(236 254 255 / 6%);
+  font-size: 14px;
+  padding: 8px 10px;
+}
+
+.mcd-about-lede {
+  color: #f8fafc;
+  font-size: clamp(19px, 2.55vw, 27px);
+  line-height: 1.16;
+  margin: 0 0 12px;
+  max-width: 30ch;
+}
+
+.mcd-about-bottom-lede {
+  border-top: 1px solid rgb(103 232 249 / 18%);
+  color: #cbd5e1;
+  font-size: 17px;
+  line-height: 1.32;
+  margin: 14px auto 0;
+  max-width: 1080px;
+  padding-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.mcd-about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.mcd-about-button {
+  align-items: center;
+  background: rgb(236 254 255 / 7%);
+  border: 1px solid rgb(103 232 249 / 44%);
+  border-radius: 8px;
+  color: #ecfeff;
+  display: inline-flex;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 12px;
+  text-decoration: none;
+}
+
+.mcd-about-button.is-primary {
+  background:
+    linear-gradient(90deg, rgb(163 230 53 / 28%), rgb(103 232 249 / 18%)),
+    rgb(236 254 255 / 8%);
+  border-color: #a3e635;
+}
+
+.mcd-about-button:hover,
+.mcd-about-button:focus-visible {
+  border-color: #67e8f9;
+  box-shadow: 0 0 22px rgb(103 232 249 / 16%);
+  outline: none;
+}
+
+.mcd-about-terminal,
+.mcd-about-panel {
+  background: rgb(3 7 10 / 42%);
+  border: 1px solid rgb(148 163 184 / 30%);
+  border-radius: 8px;
+}
+
+.mcd-about-terminal {
+  overflow: hidden;
+}
+
+.mcd-about-terminal-bar {
+  align-items: center;
+  border-bottom: 1px solid rgb(148 163 184 / 24%);
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+}
+
+.mcd-about-terminal-bar span {
+  background: #67e8f9;
+  border-radius: 50%;
+  display: block;
+  height: 8px;
+  opacity: 0.82;
+  width: 8px;
+}
+
+.mcd-about-terminal-bar span:nth-child(2) {
+  background: #a3e635;
+}
+
+.mcd-about-terminal-bar span:nth-child(3) {
+  background: #f472b6;
+}
+
+.mcd-about-terminal pre {
+  background: transparent;
+  border: 0;
+  color: #bfdbfe;
+  font-size: 12px;
+  line-height: 1.42;
+  margin: 0;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.mcd-about-panel {
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.34;
+  padding: 12px;
+}
+
+.mcd-about-panel p {
+  margin: 0;
+}
+
+.mcd-about-panel-label {
+  color: #67e8f9;
+  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
 }
 
 .inline-editable {
@@ -1603,41 +1957,38 @@ textarea {
   }
 
   .preview-pane {
-    overflow-x: hidden;
     padding: 10px;
     width: 100%;
   }
 
   .preview-document {
+    gap: 10px;
     margin: 0;
-    min-height: calc(100dvh - 78px);
+    max-width: 100%;
+    min-height: calc(100dvh - 138px);
+    overflow-wrap: break-word;
     width: 100%;
   }
 
   .preview-page {
-    aspect-ratio: 210 / 297;
-    box-shadow: 0 8px 22px rgb(28 39 49 / 10%);
-    height: auto;
-    min-height: 0;
-    padding: 22px 16px 16px;
+    height: calc((100vw - 20px) * 1.4142857);
+    max-width: 100%;
+    padding: clamp(18px, 7vw, 42px) clamp(14px, 6vw, 34px) clamp(14px, 5vw, 28px);
     width: 100%;
   }
 
   .preview-page.is-oversized {
-    min-height: 0;
+    min-height: calc((100vw - 20px) * 1.4142857);
   }
 
-  .preview-page-number {
-    margin-top: 18px;
-    padding-top: 10px;
-  }
-
-  .preview-document h1 {
-    font-size: 1.65rem;
-  }
-
-  .preview-document h2 {
-    font-size: 1.25rem;
+  .preview-page-body,
+  .preview-document pre,
+  .preview-table-wrap,
+  .mcd-table-figure,
+  .mcd-image-figure,
+  .mcd-math {
+    max-width: 100%;
+    min-width: 0;
   }
 
   .preview-document p,
@@ -1645,12 +1996,51 @@ textarea {
     max-width: 100%;
   }
 
+  .preview-document pre,
+  .mcd-math {
+    overflow-x: auto;
+  }
+
+  .mcd-image-figure {
+    display: block;
+    width: 100%;
+  }
+
   .mcd-insert-lines {
     max-width: 100%;
   }
 
-  .preview-table-wrap {
-    max-height: 62dvh;
+  .mcd-about-popup {
+    max-height: none;
+    padding: 76px 14px 14px;
+  }
+
+  .mcd-about-page {
+    gap: 14px;
+    padding: 0;
+  }
+
+  .mcd-about-page-window {
+    max-height: none;
+    min-height: 100dvh;
+    overflow: hidden;
+  }
+
+  .mcd-about-nav {
+    align-items: flex-start;
+    left: 14px;
+    right: 14px;
+    top: 14px;
+  }
+
+  .mcd-about-grid,
+  .mcd-about-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .mcd-about-lede {
+    font-size: 21px;
+    max-width: 100%;
   }
 }
 
